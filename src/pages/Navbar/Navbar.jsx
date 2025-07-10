@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import { FiMoon, FiSun, FiSunrise } from 'react-icons/fi';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import Logo from '../../Utilis/Logo/Logo';
 
 const Navbar = () => {
   const { user, userSignOut } = use(AuthContext)
@@ -84,6 +85,18 @@ const Navbar = () => {
           Trips
         </NavLink>
       </li>
+      {
+        user && <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive ? 'text-primary font-semibold' : 'text-gray-700'
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      }
     </>
   );
 
@@ -107,14 +120,8 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <img
-            src="https://i.ibb.co/ycDfP4ts/bromon-Barta.png"
-            alt="logo"
-            className="w-12 h-12 object-contain"
-          />
-          <span className="text-xl font-bold text-gray-800">BhromonBarta</span>
-        </div>
+        <Logo></Logo>
+
       </div>
 
       {/* Desktop Menu */}

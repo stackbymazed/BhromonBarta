@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Lottie from 'lottie-react';
-import animationData from '../../../Animation.json'; 
+import animationData from '../../../Animation.json';
 import { Link } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import GoogleLogIn from '../../Utilis/GoogleLogIn/GoogleLogIn';
 
 const SignIn = () => {
     const { userSignin, resetPassword } = useContext(AuthContext);
@@ -35,11 +36,6 @@ const SignIn = () => {
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
-            {/* Lottie Animation */}
-            <div className="flex-1 flex items-center justify-center bg-gray-100 p-6">
-                <Lottie animationData={animationData} loop className="w-full max-w-md" />
-            </div>
-
             {/* SignIn Form */}
             <div className="flex-1 flex items-center justify-center p-6">
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md bg-white shadow-xl rounded-lg p-8 space-y-4">
@@ -96,7 +92,12 @@ const SignIn = () => {
                             Sign Up
                         </Link>
                     </p>
+                    <GoogleLogIn></GoogleLogIn>
                 </form>
+            </div>
+            {/* Lottie Animation */}
+            <div className="flex-1 flex items-center justify-center bg-gray-100 p-6">
+                <Lottie animationData={animationData} loop className="w-full max-w-md" />
             </div>
         </div>
     );
