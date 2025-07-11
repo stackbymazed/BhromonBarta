@@ -6,11 +6,14 @@ import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import GoogleLogIn from '../../Utilis/GoogleLogIn/GoogleLogIn';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import useAxios from '../../hooks/useAxios';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
 
     const { createUser, upDateUser } = useContext(AuthContext)
 
+    const axiosUrl = useAxios()
     const {
         register,
         handleSubmit,
@@ -31,8 +34,9 @@ const SignUp = () => {
                 method: "POST",
                 body: formData,
             });
+            console.log(res)
             const result = await res.json();
-
+            console.log(result)
             if (result.success) {
                 const imageUrl = result.data.url;
 
@@ -51,20 +55,28 @@ const SignUp = () => {
                             .then(() => {
                                 // Profile updated!
                                 // ...
-                            }).catch((error) => {
-                                // An error occurred
-                                // ...
-                            });
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Successfully login ",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        // Reset form
-                        reset();
+                                const newUser = {
+                                    name: data.name,
+                                    email: data.email,
+                                    photoURL: imageUrl,
+                                    role: 'tourist', 
+                                };
 
+                                axiosUrl.post(`/users`, newUser)
+                                    .then(() => {
+                                        Swal.fire({
+                                            position: "top-end",
+                                            icon: "success",
+                                            title: "Successfully signed up",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+
+                                        reset(); // Clear form
+                                    })
+                            }).catch((error) => {
+                                toast.error("Something went wrong Host Image");
+                            });
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -76,11 +88,11 @@ const SignUp = () => {
                 // TODO : amare date database e POST  korte hobe
 
             } else {
-                alert("❌ Image upload failed");
+                toast.error("❌ Image upload failed");
             }
         } catch (error) {
             console.error("❌ Error uploading image:", error);
-            alert("Something went wrong");
+            toast.error("Something went wrong Host Image");
         }
     };
 

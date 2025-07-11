@@ -2,34 +2,50 @@ import React, { use } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import { toast } from 'react-toastify';
+import useAxios from '../../hooks/useAxios';
 
 const GoogleLogIn = () => {
     const { signUpWithGoogle } = use(AuthContext)
     const navigate = useNavigate()
-
+    const axiosUrl = useAxios()
     const handleGoogleSignUp = () => {
         signUpWithGoogle()
             .then((result) => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Successfully login with Google!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate("/")
-            }).catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
+                const user = result.user;
 
-    }
+                toast.success("Logged in with Google successfully");
+
+                const newUser = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photoURL: user?.photoURL, // Note: it's photoURL, not photoUrl
+                    role: 'tourist',
+                };
+
+                console.log(user);
+                console.log(user.email);
+                console.log(newUser);
+
+                axiosUrl.post(`/users`, newUser)
+                    .then(() => {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Successfully signed up",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        reset(); // Clear form
+                    });
+
+                navigate("/");
+            })
+            .catch((error) => {
+                toast.error(`Something went wrong during Google sign up: ${error.message}`);
+            });
+    };
+
     return (
         <div>
             <div className="divider">OR</div>

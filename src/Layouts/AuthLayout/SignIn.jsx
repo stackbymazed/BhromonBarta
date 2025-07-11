@@ -5,6 +5,7 @@ import animationData from '../../../Animation.json';
 import { Link } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import GoogleLogIn from '../../Utilis/GoogleLogIn/GoogleLogIn';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const { userSignin, resetPassword } = useContext(AuthContext);
@@ -18,10 +19,10 @@ const SignIn = () => {
     const onSubmit = (data) => {
         userSignin(data.email, data.password)
             .then((res) => {
-                console.log("User logged in:", res.user);
+                toast.success("User logged in:");
             })
             .catch((err) => {
-                console.error("Login error:", err.message);
+                toast.error("Login error:", err.message);
             });
     };
 
@@ -30,7 +31,7 @@ const SignIn = () => {
         if (email) {
             resetPassword(email)
                 .then(() => alert("Check your email for reset instructions."))
-                .catch((err) => alert(err.message));
+                .catch((err) => toast.error(err.message));
         }
     };
 

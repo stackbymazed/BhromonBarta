@@ -1,80 +1,26 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useNavigate } from 'react-router';
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const TravelGuide = () => {
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure()
 
-    // Hardcoded Bangladesh travel packages
-    const samplePackages = [
-        {
-            _id: 'sundarbans',
-            image: 'https://upload.wikimedia.org/wikipedia/commons/6/68/Sundarbans_River.jpg',
-            tourType: 'Wildlife',
-            title: 'Explore the Sundarbans Mangrove Forest',
-            price: 4500,
-        },
-        {
-            _id: 'coxsbazar',
-            image: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Cox%27s_Bazar_beach.jpg',
-            tourType: 'Beach',
-            title: 'Relax at Cox’s Bazar – World’s Longest Sea Beach',
-            price: 5500,
-        },
-        {
-            _id: 'sajek',
-            image: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Sajek_valley.jpg',
-            tourType: 'Hill Tract',
-            title: 'Sajek Valley Adventure in Rangamati',
-            price: 6000,
-        },
-    ];
+    const [packages, setPackages] = useState([]);
+    // const [guides, setGuides] = useState([]);
 
-    // Hardcoded Bangladesh-based tour guides
-    const sampleGuides = [
-        {
-            _id: 'guide1',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/7/77/Bangladeshi_man_in_Dhaka.jpg',
-            name: 'Rafiqul Islam',
-            experience: 7,
-            language: 'Bangla, English',
-        },
-        {
-            _id: 'guide2',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Bangladeshi_woman_with_scarf.jpg',
-            name: 'Nasima Akter',
-            experience: 5,
-            language: 'Bangla, Hindi, English',
-        },
-        {
-            _id: 'guide3',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Bangladeshi_young_man.jpg',
-            name: 'Tanvir Hossain',
-            experience: 4,
-            language: 'Bangla, English',
-        },
-        {
-            _id: 'guide4',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Bangladeshi_old_man.jpg',
-            name: 'Mohammad Ali',
-            experience: 10,
-            language: 'Bangla, Urdu, English',
-        },
-        {
-            _id: 'guide5',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Bangladeshi_girl_in_Saree.jpg',
-            name: 'Sadia Rahman',
-            experience: 6,
-            language: 'Bangla, English, French',
-        },
-        {
-            _id: 'guide6',
-            photo: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Bangladeshi_man_working.jpg',
-            name: 'Jashim Uddin',
-            experience: 8,
-            language: 'Bangla, English, Arabic',
-        },
-    ];
+    useEffect(() => {
+        axiosSecure.get("/packages")
+            .then(res => setPackages(res.data))
+            .catch(err => console.error(err));
+
+        // axiosSecure.get("/guides")
+        //     .then(res => setGuides(res.data))
+        //     .catch(err => console.error(err));
+    }, [axiosSecure]);
 
     return (
         <div className="p-6 max-w-6xl mx-auto">
@@ -88,7 +34,7 @@ const TravelGuide = () => {
                 {/* Our Packages */}
                 <TabPanel>
                     <div className="grid md:grid-cols-3 gap-6 mt-6">
-                        {samplePackages.map(pkg => (
+                        {packages.map(pkg => (
                             <div key={pkg._id} className="bg-white rounded-2xl shadow-md overflow-hidden">
                                 <img src={pkg.image} alt={pkg.title} className="w-full h-48 object-cover" />
                                 <div className="p-4">
@@ -110,7 +56,8 @@ const TravelGuide = () => {
                 {/* Tour Guides */}
                 <TabPanel>
                     <div className="grid md:grid-cols-3 gap-6 mt-6">
-                        {sampleGuides.map(guide => (
+                        sdfadsf
+                        {/* {sampleGuides.map(guide => (
                             <div key={guide._id} className="bg-white rounded-2xl shadow-md overflow-hidden">
                                 <img src={guide.photo} alt={guide.name} className="w-full h-48 object-cover" />
                                 <div className="p-4">
@@ -125,11 +72,12 @@ const TravelGuide = () => {
                                     </button>
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </TabPanel>
             </Tabs>
         </div>
+
     );
 };
 

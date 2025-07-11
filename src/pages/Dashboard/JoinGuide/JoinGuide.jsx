@@ -1,10 +1,12 @@
-import React from "react";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
 
 const JoinGuide = () => {
     const AxiosSecure = useAxiosSecure()
+    const {user} = use(AuthContext)
     const {
         register,
         handleSubmit,
@@ -15,10 +17,11 @@ const JoinGuide = () => {
     const onSubmit = async (data) => {
         const applicationData = {
             ...data,
+            applicantEmail: user?.email,
             status: "pending",
             submittedAt: new Date()
         };
-
+        console.log(applicationData)
         try {
             const res = await AxiosSecure.post("/guide-applications", applicationData);
 

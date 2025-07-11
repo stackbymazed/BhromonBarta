@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Dialog } from "@headlessui/react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useState, Fragment } from "react";
+import { useState, Fragment, use } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxios from "../../../hooks/useAxios";
 import moment from "moment";
@@ -10,8 +10,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
 
 const ManageStories = () => {
+     const { user } = use(AuthContext)
     const queryClient = useQueryClient();
     const [editStory, setEditStory] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,10 +23,12 @@ const ManageStories = () => {
     const useAxiosUrl = useAxios();
     const axiosSecure = useAxiosSecure();
 
+   
+    console.log(user?.email)
     const { data: stories = [], isLoading } = useQuery({
-        queryKey: ["stories"],
+        queryKey: ["stories",user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get("/stories");
+            const res = await axiosSecure.get(`/stories/${user?.email}`);
             return res.data;
         },
     });
@@ -154,6 +158,10 @@ const ManageStories = () => {
     return (
         <>
             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {
+                    stories.length == 0 ? < h1 className="text-2xl font-bold ">Your are not add any story</h1> : ''
+
+                }
                 {stories.map((story) => (
                     <div
                         key={story._id}
@@ -202,10 +210,10 @@ const ManageStories = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div >
 
             {/* Modal */}
-            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} as={Fragment}>
+            < Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} as={Fragment} >
                 <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
                     <Dialog.Panel className="bg-white dark:bg-gray-800 rounded-xl w-full max-w-lg p-6 space-y-6">
                         <Dialog.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -280,7 +288,7 @@ const ManageStories = () => {
                         </div>
                     </Dialog.Panel>
                 </div>
-            </Dialog>
+            </Dialog >
         </>
     );
 };

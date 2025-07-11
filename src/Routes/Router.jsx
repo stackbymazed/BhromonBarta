@@ -12,6 +12,13 @@ import ManageStories from "../pages/Dashboard/ManageStories/ManageStories";
 import AddStories from "../pages/Dashboard/AddStories/AddStories";
 import JoinGuide from "../pages/Dashboard/JoinGuide/JoinGuide";
 import MyAssignedTours from "../pages/Dashboard/MyAssignedTours/MyAssignedTours";
+import AddPackage from "../pages/Dashboard/AddPackage/AddPackage";
+import PackageDetails from "../pages/PackageDetails/PackageDetails";
+import AdminRoute from "../Utilis/AdminRoute/AdminRoute";
+import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import ManageCandidates from "../pages/Dashboard/ManageCandidates/ManageCandidates";
+import ProfileGuide from "../pages/Dashboard/ProfileGuide/ProfileGuide";
 
 
 const router = createBrowserRouter([
@@ -38,37 +45,63 @@ const router = createBrowserRouter([
       {
         path: 'signUp',
         Component: SignUp
+      },
+      {
+        path: '/packages/:id',
+        Component: PackageDetails
       }
     ]
   },
   {
-    path:'dashboard',
-    Component:DashBoardLayout,
-    children:[
+    path: 'dashboard',
+    Component: DashBoardLayout,
+    children: [
       {
-        path:'profile',
-        Component:Profile
+        path: 'profile',
+        Component: Profile
       },
       {
-        path:'bookings',
+        path: 'bookings',
         Component: MyBooking
       },
       {
-        path:'manage-stories',
-        Component:ManageStories
+        path: 'profileGuide',
+        Component: ProfileGuide
       },
       {
-        path:'add-story',
-        Component:AddStories
+        path: 'manage-stories',
+        Component: ManageStories
       },
       {
-        path:'tour-guide',
+        path: 'add-story',
+        Component: AddStories
+      },
+      {
+        path: 'tour-guide',
         Component: JoinGuide
       },
       {
-        path:'assigned-tours',
+        path: 'assigned-tours',
         Component: MyAssignedTours
       },
+      {
+        path: 'add-package',
+        element: <AdminRoute>
+          <AddPackage></AddPackage>
+        </AdminRoute>
+      },
+      {
+        path: 'manage-profile',
+        Component: AdminProfile
+      },
+      {
+        path: 'manage-users',
+        Component: ManageUsers
+      },
+      {
+        path: 'manage-candidates',
+        Component: ManageCandidates
+      }
 
     ]
   }

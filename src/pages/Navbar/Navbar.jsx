@@ -3,6 +3,7 @@ import { FiMoon, FiSun, FiSunrise } from 'react-icons/fi';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import Logo from '../../Utilis/Logo/Logo';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, userSignOut } = use(AuthContext)
@@ -35,10 +36,10 @@ const Navbar = () => {
   const handleSignOut = () => {
     userSignOut()
       .then(() => {
-        // Sign-out successful.
+        toast.success("Success SignOut User !!");
         navigate('signIn')
       }).catch((error) => {
-        // An error happened.
+        toast.error("Something went wrong");
       });
 
 
@@ -120,7 +121,9 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <Logo></Logo>
+       <div className='hidden md:block lg:block'>
+         <Logo></Logo>
+       </div>
 
       </div>
 
@@ -150,7 +153,7 @@ const Navbar = () => {
         </button>
         {
           user ? <>
-            <div className="dropdown dropdown-hover mr-10">
+            <div className="dropdown dropdown-hover ">
               <div tabIndex={0}>
                 <img className='w-[40px] h-[40px] rounded-full' src={user?.photoURL} alt="User" />
               </div>

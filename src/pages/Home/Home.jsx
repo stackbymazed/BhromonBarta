@@ -5,6 +5,8 @@ import TravelGuide from '../../Components/TravelGuide/TravelGuide';
 import TouristStorySection from '../../Components/TouristStorySection/TouristStorySection';
 import TravelerReviews from '../../Components/TravelerReviews/TravelerReviews';
 import PopularCuisine from '../../Components/PopularCuisine/PopularCuisine';
+// import { Gallery } from '../../Utilis/LightGallery/Gallery';
+
 
 const Home = () => {
     return (
@@ -15,6 +17,7 @@ const Home = () => {
            <TouristStorySection></TouristStorySection>
            <PopularCuisine></PopularCuisine>
            <TravelerReviews></TravelerReviews>
+           {/* <Gallery></Gallery> */}
         </div>
     );
 };
