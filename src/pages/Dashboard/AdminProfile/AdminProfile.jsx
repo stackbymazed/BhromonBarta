@@ -31,6 +31,7 @@ const AdminProfile = () => {
         }
     });
 
+
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         const { _id, ...updateFields } = editData;
