@@ -56,6 +56,7 @@ const MyBooking = () => {
     };
 
     const closeModal = () => {
+        refetch()
         setSelectedBooking(null);
         setModalOpen(false);
     };
@@ -93,8 +94,8 @@ const MyBooking = () => {
                                                 onClick={() => openModal(b)}
                                                 disabled={modalOpen}
                                                 className={`w-full sm:w-auto px-3 py-1 rounded text-sm ${modalOpen
-                                                        ? 'bg-green-300 cursor-not-allowed text-white'
-                                                        : 'bg-green-500 hover:bg-green-600 text-white'
+                                                    ? 'bg-green-300 cursor-not-allowed text-white'
+                                                    : 'bg-green-500 hover:bg-green-600 text-white'
                                                     }`}
                                             >
                                                 Pay
@@ -103,8 +104,8 @@ const MyBooking = () => {
                                                 onClick={() => handleCancel(b._id)}
                                                 disabled={modalOpen}
                                                 className={`w-full sm:w-auto px-3 py-1 rounded text-sm ${modalOpen
-                                                        ? 'bg-red-300 cursor-not-allowed text-white'
-                                                        : 'bg-red-500 hover:bg-red-600 text-white'
+                                                    ? 'bg-red-300 cursor-not-allowed text-white'
+                                                    : 'bg-red-500 hover:bg-red-600 text-white'
                                                     }`}
                                             >
                                                 Cancel
@@ -161,7 +162,7 @@ const MyBooking = () => {
                                     </div>
                                     <div>
                                         <Elements stripe={stripePromise}>
-                                            <PaymentForm closeModal={closeModal} selectedBooking={selectedBooking}></PaymentForm>
+                                            <PaymentForm closeModal={closeModal} selectedBooking={selectedBooking} ></PaymentForm>
                                         </Elements>
                                     </div>
                                 </Dialog.Panel>

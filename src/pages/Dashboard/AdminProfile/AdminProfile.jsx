@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthContext';
@@ -7,22 +7,45 @@ import Loading from '../../../Utilis/Loading/Loading';
 
 const AdminProfile = () => {
     const { user } = useContext(AuthContext);
-    console.log(user?.photoURL)
     const axiosSecure = useAxiosSecure();
     const [isModalOpen, setModalOpen] = useState(false);
     const [editData, setEditData] = useState({});
+    const [totalPayData, setTotalPayData] = useState(0);
 
     // Fetch Admin Stats
-    //   const { data: stats, isLoading: loadingStats } = useQuery({
-    //     queryKey: ['admin-stats'],
-    //     queryFn: async () => {
-    //       const res = await axiosSecure.get('/admin-stats');
-    //       return res.data;
-    //     }
-    //   });
+    const { data: stats } = useQuery({
+        queryKey: ['dashboard-stats'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/dashboard/stats');
+            return res.data;
+        }
+    });
+
+
+
+    const { data: paymentsData = [] } = useQuery({
+        queryKey: ['/payments'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/payments');
+            return res.data;
+        }
+    });
+
+    useEffect(() => {
+        if (paymentsData.length > 0) {
+            const total = paymentsData.reduce((sum, payment) => sum + payment.amount, 0);
+            setTotalPayData(total);
+        }
+    }, [paymentsData]);
+
+    console.log(totalPayData);
+
+
+
+
 
     // Fetch Admin Profile
-    const { data: adminData, isLoading: loadingAdmin } = useQuery({
+    const { data: adminData, isLoading: loadingAdmin, refetch } = useQuery({
         queryKey: ['admin-info', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -35,38 +58,31 @@ const AdminProfile = () => {
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         const { _id, ...updateFields } = editData;
-        // console.log(updateFields)
+        console.log(updateFields, _id)
         try {
-            await axiosSecure.patch(`/users/${_id}`, updateFields);
+            await axiosSecure.patch(`/users/update/${updateFields?.email}`, updateFields);
             Swal.fire('Updated!', 'Profile updated successfully.', 'success');
             setModalOpen(false);
+            refetch()
         } catch (error) {
             Swal.fire('Error', 'Something went wrong.', 'error');
         }
     };
 
-
-    const stats = {
-        "totalPayment": 1234,
-        "totalTourGuides": 5,
-        "totalPackages": 10,
-        "totalTourists": 20,
-        "totalStories": 8
-    }
     if (loadingAdmin) return <Loading />;
     //   if (loadingStats || loadingAdmin) return <Loading />;
     return (
         <div className="max-w-6xl mx-auto p-6">
             {/* Welcome */}
-            <h2 className="text-3xl font-bold mb-6">Welcome, {adminData?.name } 👋</h2>
+            <h2 className="text-3xl font-bold mb-6">Welcome, {adminData?.name} 👋</h2>
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                <StatCard label="Total Payment" value={`$${stats.totalPayment || 0}`} />
-                <StatCard label="Total Tour Guides" value={stats.totalTourGuides} />
-                <StatCard label="Total Packages" value={stats.totalPackages} />
-                <StatCard label="Total Clients" value={stats.totalTourists} />
-                <StatCard label="Total Stories" value={stats.totalStories} />
+                <StatCard label="Total Payment" value={`$${totalPayData || 0}`} />
+                <StatCard label="Total Tour Guides" value={stats?.guide} />
+                <StatCard label="Total Packages" value={stats?.packages} />
+                <StatCard label="Total Clients" value={stats?.users} />
+                <StatCard label="Total Stories" value={stats?.stories} />
             </div>
 
             {/* Profile Info */}
@@ -96,7 +112,7 @@ const AdminProfile = () => {
 
             {/* Edit Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+                <div className="fixed inset-0  bg-opacity-30 flex justify-center items-center z-50">
                     <form
                         onSubmit={handleEditSubmit}
                         className="bg-white p-6 rounded w-full max-w-md shadow-md relative"

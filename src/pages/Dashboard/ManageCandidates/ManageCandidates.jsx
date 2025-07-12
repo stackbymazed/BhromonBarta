@@ -8,7 +8,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const ManageCandidates = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
-    const { user } = useContext(AuthContext); // ✅ now properly using user
+    const { user } = useContext(AuthContext);
 
     // Fetch all applications
     const { data: candidates = [], isLoading } = useQuery({

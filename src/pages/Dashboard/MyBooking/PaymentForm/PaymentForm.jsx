@@ -39,7 +39,7 @@ const PaymentForm = ({ closeModal, selectedBooking }) => {
             return
         } else {
             setError('');
-            console.log('[PaymentMethod]', paymentMethod);
+            // console.log('[PaymentMethod]', paymentMethod);
 
             const res = await axiosSecure.post('/create-payment-intent', {
                 amountSent,
@@ -62,11 +62,41 @@ const PaymentForm = ({ closeModal, selectedBooking }) => {
                 setError(confirmError.message);
                 // setProcessing(false);
             } else {
-                if (paymentIntent.status === 'succeeded') {
-                    Swal.fire('Payment Successful', 'Your booking is confirmed.', 'success');
-                    setLoading(false)
-                    closeModal();
+                const paymentData = {
+                    transactionId: paymentIntent?.payment_method,
+                    amount: parseInt(selectedBooking?.price),
+                    touristEmail: user?.email,
+                    bookingId: selectedBooking?._id,
+                    packageId: selectedBooking?.packageId,
+                    packageName: selectedBooking?.packageName,
+                    touristName: selectedBooking?.touristName,
+                    touristImage: selectedBooking?.touristImage,
+                    tourDate: selectedBooking?.tourDate,
+                    guideId: selectedBooking?.guideId,
+                    status: 'paid',
+                    paidAt: new Date(),
+                };
+                try {
+                    if (paymentIntent.status === 'succeeded') {
+                        // 1. Store payment history
+                        const amountSend = await axiosSecure.post('/Payments', paymentData);
+                        // console.log(amountSend);
+
+                        // 2. Update booking status to "paid"
+                        await axiosSecure.patch(`/bookings/update-status/${selectedBooking?._id}`);
+
+                        // 3. Show success message and close modal
+                        Swal.fire('Payment Successful', 'Your booking is confirmed.', 'success');
+                        setLoading(false);
+                        closeModal();
+                        
+                    }
+
                 }
+                catch (error) {
+                    console.log(error)
+                }
+
                 // setProcessing(false);
             }
         };
@@ -117,7 +147,7 @@ const PaymentForm = ({ closeModal, selectedBooking }) => {
 
                 >
                     {
-                        loading? <h1>Waiting for pay<span className="loading loading-spinner loading-xs"></span> </h1>: 'Proceed to Pay'
+                        loading ? <h1>Waiting for pay<span className="loading loading-spinner loading-xs"></span> </h1> : 'Proceed to Pay'
                     }
                 </button>
             </div>
