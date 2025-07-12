@@ -1,13 +1,14 @@
-import React, { use } from 'react';
+import React, { useContext } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthContext';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
 
 const ManageCandidates = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
-    const { user: nayem } = use(AuthContext)
+    const { user } = useContext(AuthContext); // ✅ now properly using user
 
     // Fetch all applications
     const { data: candidates = [], isLoading } = useQuery({
@@ -18,22 +19,7 @@ const ManageCandidates = () => {
         },
     });
 
-    // Accept: Update role + delete application
-    const acceptCandidate = useMutation({
-        mutationFn: async (user) => {
-            await axiosSecure.patch(`/users/${user.email}`, { role: 'tour-guide' });
-            await axiosSecure.delete(`/applications/${user._id}`);
-        },
-        onSuccess: () => {
-            Swal.fire('Accepted!', 'Candidate is now a tour guide.', 'success');
-            queryClient.invalidateQueries(['candidates']);
-        },
-        onError: () => {
-            Swal.fire('Error', 'Failed to accept candidate.', 'error');
-        },
-    });
-
-    // Reject: delete only
+    // Reject mutation unchanged
     const rejectCandidate = useMutation({
         mutationFn: async (id) => {
             await axiosSecure.delete(`/applications/${id}`);
@@ -47,21 +33,37 @@ const ManageCandidates = () => {
         },
     });
 
-    const handleAccept = (applicant) => {
+    // ✅ Updated Accept handler (mutation removed)
+    const handleAccept = async (applicant) => {
+        console.log(applicant)
         Swal.fire({
             title: 'Are you sure?',
-            text: `Promote ${applicant.email} to tour guide?`,
+            text: `Promote ${applicant.applicantEmail} to tour guide?`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Yes, accept!',
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                acceptCandidate.mutate(applicant);
+                try {
+                    // 1. Promote user
+                    await axiosSecure.patch(`/users/accept/${applicant.applicantEmail}`, {
+                        role: 'guide',
+                    });
+
+                    // 2. Delete application
+                    await axiosSecure.delete(`/applications/${applicant._id}`);
+
+                    // 3. Show success & refresh
+                    Swal.fire('Accepted!', 'Candidate promoted.', 'success');
+                    queryClient.invalidateQueries(['candidates']);
+                } catch (error) {
+                    Swal.fire('Error', 'Failed to promote candidate.', 'error');
+                }
             }
         });
     };
 
-
+    // handleReject unchanged
     const handleReject = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -92,7 +94,7 @@ const ManageCandidates = () => {
                                 <th>#</th>
                                 <th>Email</th>
                                 <th>CV/Experience</th>
-                                <th>Email</th>
+                                <th>Intention</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -119,7 +121,7 @@ const ManageCandidates = () => {
                                     <td className="flex gap-2">
                                         <button
                                             className="btn btn-sm btn-success"
-                                            onClick={() => handleAccept({ email: application.applicantEmail, _id: application._id })}
+                                            onClick={() => handleAccept(application)}
                                         >
                                             Accept
                                         </button>

@@ -1,34 +1,28 @@
-import React, { use } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import React, { Fragment, useContext, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Dialog, Transition } from '@headlessui/react';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthContext';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import PaymentForm from './PaymentForm/PaymentForm';
 
 const MyBooking = () => {
     const axiosSecure = useAxiosSecure();
-    const queryClient = useQueryClient();
-    const {user} = use(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [selectedBooking, setSelectedBooking] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
-    // Fetch bookings
-    const { data: bookings = [], isLoading } = useQuery({
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHED_KEY);
+
+    const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['myBookings'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/bookings/${user?.email}`);
             return res.data;
         }
     });
-
-    // Cancel booking
-    const cancelBooking = useMutation({
-        mutationFn: async (id) => {
-            await axiosSecure.delete(`/bookings/${id}`);
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries(['myBookings']);
-        }
-    });
-
-
 
     const handleCancel = (id) => {
         Swal.fire({
@@ -39,61 +33,79 @@ const MyBooking = () => {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, cancel it!',
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                cancelBooking.mutate(id, {
-                    onSuccess: () => {
-                        Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
-                    },
-                    onError: () => {
-                        Swal.fire('Failed!', 'Something went wrong while cancelling.', 'error');
+                try {
+                    const res = await axiosSecure.delete(`/booking/${id}`);
+                    if (res?.data?.deletedCount > 0) {
+                        Swal.fire('Deleted!', 'Booking has been deleted.', 'success');
+                        refetch();
+                    } else {
+                        Swal.fire('Failed!', 'Could not delete booking.', 'warning');
                     }
-                });
+                } catch (error) {
+                    Swal.fire('Error!', error.message, 'error');
+                }
             }
         });
     };
 
+    const openModal = (booking) => {
+        setSelectedBooking(booking);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedBooking(null);
+        setModalOpen(false);
+    };
 
     if (isLoading) return <p className="text-center py-8">Loading...</p>;
 
     return (
-        <div className="p-6 max-w-6xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-6">My Bookings</h2>
+        <div className="p-4 sm:p-6 max-w-6xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6">My Bookings</h2>
+
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white shadow-md rounded border">
+                <table className="min-w-[600px] w-full bg-white shadow-md rounded border text-sm sm:text-base">
                     <thead className="bg-gray-100">
                         <tr className="text-left">
-                            <th className="py-3 px-4">Package</th>
-                            <th className="py-3 px-4">Tour Guide</th>
-                            <th className="py-3 px-4">Date</th>
-                            <th className="py-3 px-4">Price</th>
-                            <th className="py-3 px-4">Status</th>
-                            <th className="py-3 px-4 text-center">Actions</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4">Package</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4">Tour Guide</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4">Date</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4">Price</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4">Status</th>
+                            <th className="py-2 px-3 sm:py-3 sm:px-4 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {bookings.map((b) => (
                             <tr key={b._id} className="border-t hover:bg-gray-50">
-                                <td className="py-3 px-4">{b.packageName}</td>
-                                <td className="py-3 px-4">{b.tourGuideName}</td>
-                                <td className="py-3 px-4">{new Date(b.tourDate).toLocaleDateString()}</td>
-                                <td className="py-3 px-4">${b.price}</td>
-                                <td className="py-3 px-4 capitalize">{b.status}</td>
-                                <td className="py-3 px-4 flex gap-2 justify-center">
+                                <td className="py-2 px-3">{b.packageName}</td>
+                                <td className="py-2 px-3">{b.tourGuideName}</td>
+                                <td className="py-2 px-3">{new Date(b.tourDate).toLocaleDateString()}</td>
+                                <td className="py-2 px-3">${b.price}</td>
+                                <td className="py-2 px-3 capitalize">{b.status}</td>
+                                <td className="py-2 px-3 flex flex-col sm:flex-row gap-2 justify-center items-center sm:items-start">
                                     {b.status === 'pending' ? (
                                         <>
-                                            {/* Disabled Pay Button */}
                                             <button
-                                                disabled
-                                                className="bg-blue-400 text-white px-3 py-1 rounded text-sm cursor-not-allowed"
+                                                onClick={() => openModal(b)}
+                                                disabled={modalOpen}
+                                                className={`w-full sm:w-auto px-3 py-1 rounded text-sm ${modalOpen
+                                                        ? 'bg-green-300 cursor-not-allowed text-white'
+                                                        : 'bg-green-500 hover:bg-green-600 text-white'
+                                                    }`}
                                             >
-                                                Pay (coming soon)
+                                                Pay
                                             </button>
-
-                                            {/* Cancel Button */}
                                             <button
                                                 onClick={() => handleCancel(b._id)}
-                                                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+                                                disabled={modalOpen}
+                                                className={`w-full sm:w-auto px-3 py-1 rounded text-sm ${modalOpen
+                                                        ? 'bg-red-300 cursor-not-allowed text-white'
+                                                        : 'bg-red-500 hover:bg-red-600 text-white'
+                                                    }`}
                                             >
                                                 Cancel
                                             </button>
@@ -110,6 +122,54 @@ const MyBooking = () => {
                     <p className="text-center mt-6 text-gray-500">No bookings found.</p>
                 )}
             </div>
+
+            {/* Modal */}
+            <Transition appear show={modalOpen} as={Fragment}>
+                <Dialog as="div" className="relative z-50" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                    <Dialog.Title as="h3" className="text-lg font-semibold text-gray-900">
+                                        Payment Details
+                                    </Dialog.Title>
+                                    <div className="mt-3 space-y-2 text-sm sm:text-base">
+                                        <p><strong>Package:</strong> {selectedBooking?.packageName}</p>
+                                        <p><strong>Tour Guide:</strong> {selectedBooking?.tourGuideName}</p>
+                                        <p><strong>Date:</strong> {new Date(selectedBooking?.tourDate).toLocaleDateString()}</p>
+                                        <p><strong>Price:</strong> ${selectedBooking?.price}</p>
+                                    </div>
+                                    <div>
+                                        <Elements stripe={stripePromise}>
+                                            <PaymentForm closeModal={closeModal} selectedBooking={selectedBooking}></PaymentForm>
+                                        </Elements>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition>
         </div>
     );
 };

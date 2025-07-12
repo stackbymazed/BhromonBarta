@@ -37,7 +37,7 @@ const AdminProfile = () => {
         const { _id, ...updateFields } = editData;
         // console.log(updateFields)
         try {
-            await axiosSecure.patch(`/users/${editData._id}`, updateFields);
+            await axiosSecure.patch(`/users/${_id}`, updateFields);
             Swal.fire('Updated!', 'Profile updated successfully.', 'success');
             setModalOpen(false);
         } catch (error) {
@@ -58,7 +58,7 @@ const AdminProfile = () => {
     return (
         <div className="max-w-6xl mx-auto p-6">
             {/* Welcome */}
-            <h2 className="text-3xl font-bold mb-6">Welcome, {adminData?.name || user?.displayName} 👋</h2>
+            <h2 className="text-3xl font-bold mb-6">Welcome, {adminData?.name } 👋</h2>
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
