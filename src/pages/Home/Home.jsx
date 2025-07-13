@@ -5,6 +5,8 @@ import TravelGuide from '../../Components/TravelGuide/TravelGuide';
 import TouristStorySection from '../../Components/TouristStorySection/TouristStorySection';
 import TravelerReviews from '../../Components/TravelerReviews/TravelerReviews';
 import PopularCuisine from '../../Components/PopularCuisine/PopularCuisine';
+import WhyChooseUs from '../../Components/WhyChooseUs/WhyChooseUs';
+import Features from '../../Components/features/Features';
 // import { Gallery } from '../../Utilis/LightGallery/Gallery';
 
 
@@ -16,6 +18,8 @@ const Home = () => {
            <TravelGuide></TravelGuide>
            <TouristStorySection></TouristStorySection>
            <PopularCuisine></PopularCuisine>
+           <Features></Features>
+           <WhyChooseUs></WhyChooseUs>
            <TravelerReviews></TravelerReviews>
            {/* <Gallery></Gallery> */}
         </div>

@@ -8,7 +8,7 @@ const Logo = () => {
                 alt="logo"
                 className="w-12 h-12 object-contain"
             />
-            <span className="text-xl font-bold text-gray-800">BhromonBarta</span>
+            <span className="text-xl font-bold text-gray-800 dark:text-white">BhromonBarta</span>
         </div>
     );
 };

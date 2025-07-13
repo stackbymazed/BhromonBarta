@@ -3,25 +3,25 @@ const PopularCuisine = () => {
     {
       id: 'dish1',
       name: 'Hilsha Fish Curry',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Hilsha_Fish_Curry.jpg',
+      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
       description: 'The national fish of Bangladesh, cooked with mustard seeds and spices.',
     },
     {
       id: 'dish2',
       name: 'Panta Bhat',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Panta_bhat_02.jpg',
+      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
       description: 'Fermented rice soaked in water, traditionally eaten with fried hilsha or chili.',
     },
     {
       id: 'dish3',
       name: 'Bhuna Khichuri',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Bhuna_Khichuri.JPG',
+      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
       description: 'A fragrant rice and lentil dish cooked with aromatic spices, often enjoyed during festivals.',
     },
     {
       id: 'dish4',
       name: 'Mishti Doi',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Misti_doi_-_Bangladeshi_sweet_yogurt.jpg',
+      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
       description: 'Sweetened fermented yogurt dessert, a favorite Bengali delicacy.',
     },
   ];

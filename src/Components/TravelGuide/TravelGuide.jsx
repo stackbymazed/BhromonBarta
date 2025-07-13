@@ -21,7 +21,7 @@ const TravelGuide = () => {
         //     .then(res => setGuides(res.data))
         //     .catch(err => console.error(err));
     }, [axiosSecure]);
-
+    console.log(packages)
     return (
         <div className="px-4 py-10 max-w-7xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
@@ -55,10 +55,12 @@ const TravelGuide = () => {
                                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full"
                             >
                                 <img
-                                    src={pkg.image}
+                                    src={pkg?.gallery?.[0] || "https://via.placeholder.com/400x300?text=No+Image"}
                                     alt={pkg.title}
                                     className="w-full h-48 object-cover"
                                 />
+
+
                                 <div className="p-5 flex flex-col flex-1">
                                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">{pkg.title}</h3>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Type: {pkg.tourType}</p>

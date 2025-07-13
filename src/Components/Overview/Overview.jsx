@@ -23,22 +23,22 @@ const Overview = () => {
         {/* Image Grid Instead of Video */}
         <div className="grid grid-cols-2 gap-4">
           <img
-            src="https://source.unsplash.com/400x300/?bangladesh,nature"
+            src="https://i.ibb.co/d0mms3pK/coxsjpg.jpg"
             alt="Nature spot"
             className="rounded-lg object-cover h-40 w-full shadow-md"
           />
           <img
-            src="https://source.unsplash.com/400x300/?trekking,people"
+            src="https://i.ibb.co/vCRj4w76/mela.jpg"
             alt="Trekking"
             className="rounded-lg object-cover h-40 w-full shadow-md"
           />
           <img
-            src="https://source.unsplash.com/400x300/?camping"
+            src="https://i.ibb.co/dsKN3J9y/Saint.jpg"
             alt="Camping"
             className="rounded-lg object-cover h-40 w-full shadow-md"
           />
           <img
-            src="https://source.unsplash.com/400x300/?beach,bangladesh"
+            src="https://i.ibb.co/WLpfDp6/Sajek-Valley.jpg"
             alt="Beach"
             className="rounded-lg object-cover h-40 w-full shadow-md"
           />
