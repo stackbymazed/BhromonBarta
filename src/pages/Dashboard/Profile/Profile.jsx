@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -26,12 +27,19 @@ const Profile = () => {
         displayName: editData.name,
         photoURL: editData.photoURL,
       });
-      alert("Profile updated successfully!");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Profile updated successfully!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      // alert("Profile updated successfully!");
       setIsModalOpen(false);
-      window.location.reload(); // Optional: refresh to reflect updated UI
+      // window.location.reload(); // Optional: refresh to reflect updated UI
     } catch (error) {
       console.error("Update failed:", error.message);
-      alert("Failed to update profile");
+      // alert("Failed to update profile");
     }
   };
 
@@ -71,7 +79,7 @@ const Profile = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md relative">
             <h3 className="text-2xl font-semibold mb-4">Edit Profile</h3>
             <form onSubmit={handleUpdate} className="space-y-4">

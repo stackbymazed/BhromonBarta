@@ -63,7 +63,9 @@ const PackageDetails = () => {
         register('tourDate', { required: 'Tour date is required' });
     }, [axiosSecure, id, register]);
 
+    console.log(guides)
     const onSubmit = (data) => {
+        console.log(data)
         setLoading(true);
         const booking = {
             packageId: packageData._id,
@@ -87,6 +89,7 @@ const PackageDetails = () => {
                         confirmButtonColor: '#3085d6'
                     });
                     setLoading(false);
+                    navigate('/')
                 })
                 .catch(() => {
                     Swal.fire({
@@ -178,7 +181,7 @@ const PackageDetails = () => {
                     {guides.map(guide => (
                         <div
                             key={guide._id}
-                            onClick={() => navigate(`/guides/${guide?._id}`)}
+                            onClick={() => navigate(`/singleGuide/${guide?._id}`)}
                             className="cursor-pointer p-4 bg-white rounded-xl shadow hover:shadow-md transition"
                         >
                             <img src={guide?.photoURL} alt={guide?.name} className="w-full h-48 object-cover rounded" />
@@ -253,7 +256,7 @@ const PackageDetails = () => {
                         >
                             <option value="">Select Tour Guide</option>
                             {guides.map(guide => (
-                                <option key={guide._id} value={guide._id}>{guide.name}</option>
+                                <option key={guide?._id} value={guide?.email}>{guide?.name}</option>
                             ))}
                         </select>
                         {errors.guideId && <p className="text-red-600 text-sm mt-1">{errors.guideId.message}</p>}
@@ -265,7 +268,7 @@ const PackageDetails = () => {
                             disabled={loading}
                             className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 disabled:opacity-50"
                         >
-                            {loading ? 'Booking...' : 'Book Now'}
+                            {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Book Now'}
                         </button>
                             :
 

@@ -83,7 +83,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar fixed top-0 left-0 w-full z-50  bg-base-100 shadow-md px-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 backdrop-blur-md
+    <div className="navbar sticky top-0 z-50  left-0 w-full bg-base-100 shadow-md px-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 backdrop-blur-md
 ">
       {/* Left: Logo + Mobile Menu */}
       <div className="navbar-start">
@@ -147,18 +147,19 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                   className="absolute top-full right-2 sm:right-4 mt-3  max-w[350px] sm:max-w-[200px] rounded-xl z-30 bg-white dark:bg-gray-800 text-black dark:text-white shadow-xl p-4 space-y-2"
                 >
-                  <li><li>
-                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-gray-700 dark:text-white'}>
-                      Dashboard
-                    </NavLink>
-                  </li></li>
-                  <li className="text-base font-semibold break-words">
+
+                  <li className="text-base font-semibold break-words ">
                     {user?.displayName}
                   </li>
                   <li className="text-base font-semibold break-words">
                     {user?.email}
                   </li>
-                  <li>
+                  <li className='border-2 rounded-sm px-3 py-1 hover:bg-gray-100'>
+                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-gray-700 dark:text-white'}>
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li className='border-2'>
                     <button
                       onClick={handleSignOut}
                       className="w-full btn btn-outline btn-sm dark:border-white dark:text-white"

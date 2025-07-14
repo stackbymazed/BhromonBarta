@@ -26,7 +26,7 @@ const Banner = () => {
   const handlePrev = () => sliderRef.current.slickPrev();
 
   return (
-    <div className="relative mt-8">
+    <div className="relative ">
       {/* Custom Navigation Arrows */}
       <button
         onClick={handlePrev}

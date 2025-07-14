@@ -4,7 +4,7 @@ import Lottie from 'lottie-react';
 import animationData from '../../../Animation.json';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import GoogleLogIn from '../../Utilis/GoogleLogIn/GoogleLogIn';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxios from '../../hooks/useAxios';
 import { toast } from 'react-toastify';
@@ -12,7 +12,9 @@ import { toast } from 'react-toastify';
 const SignUp = () => {
 
     const { createUser, upDateUser } = useContext(AuthContext)
-
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
     const axiosUrl = useAxios()
     const {
         register,
@@ -55,11 +57,13 @@ const SignUp = () => {
                             .then(() => {
                                 // Profile updated!
                                 // ...
+                                navigate('/')
+                                
                                 const newUser = {
                                     name: data.name,
                                     email: data.email,
                                     photoURL: imageUrl,
-                                    role: 'tourist', 
+                                    role: 'tourist',
                                 };
 
                                 axiosUrl.post(`/users`, newUser)
@@ -154,12 +158,22 @@ const SignUp = () => {
                     <div>
                         <label className="block mb-1 font-medium text-gray-700">Password</label>
                         <input
-                            type="password"
+                           type="password"
                             {...register("password", {
                                 required: "Password is required",
                                 minLength: {
                                     value: 6,
-                                    message: "Minimum 6 characters required",
+                                    message: "Password must be at least 6 characters long",
+                                },
+                                validate: {
+                                    hasUppercase: (value) =>
+                                        /[A-Z]/.test(value) || "Password must contain at least one uppercase letter",
+                                    hasLowercase: (value) =>
+                                        /[a-z]/.test(value) || "Password must contain at least one lowercase letter",
+                                    hasNumber: (value) =>
+                                        /[0-9]/.test(value) || "Password must contain at least one number",
+                                    hasSpecialChar: (value) =>
+                                        /[!@#$%^&*(),.?":{}|<>]/.test(value) || "Password must contain at least one special character",
                                 },
                             })}
                             className="input input-bordered w-full"

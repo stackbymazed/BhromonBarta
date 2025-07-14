@@ -88,7 +88,7 @@ const AdminProfile = () => {
             {/* Profile Info */}
             <div className="bg-white p-6 rounded shadow flex flex-col md:flex-row items-center gap-6">
                 <img
-                    src={user?.photoURL || adminData?.photoURL}
+                    src={user?.photoURL }
                     alt="Admin"
                     className="w-40 h-40 object-cover rounded-full border"
                 />

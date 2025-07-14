@@ -13,7 +13,7 @@ const GoogleLogIn = () => {
         signUpWithGoogle()
             .then((result) => {
                 const user = result.user;
-
+                navigate('/')
                 toast.success("Logged in with Google successfully");
 
                 const newUser = {
@@ -23,9 +23,9 @@ const GoogleLogIn = () => {
                     role: 'tourist',
                 };
 
-                console.log(user);
-                console.log(user.email);
-                console.log(newUser);
+                // console.log(user);
+                // console.log(user.email);
+                // console.log(newUser);
 
                 axiosUrl.post(`/users`, newUser)
                     .then(() => {

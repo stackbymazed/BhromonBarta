@@ -19,6 +19,11 @@ import AdminProfile from "../pages/Dashboard/AdminProfile/AdminProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import ManageCandidates from "../pages/Dashboard/ManageCandidates/ManageCandidates";
 import ProfileGuide from "../pages/Dashboard/ProfileGuide/ProfileGuide";
+import AllStories from "../pages/AllStories/AllStories";
+import SingleStories from "../pages/SingleStories/SingleStories";
+import GuideDetails from "../pages/GuideDetails/GuideDetails";
+import Trips from "../pages/Trips/Trips";
+import PrivateRoute from "../Utilis/PrivateRoute/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -39,6 +44,10 @@ const router = createBrowserRouter([
         Component: Community
       },
       {
+        path: 'trips',
+        Component: Trips
+      },
+      {
         path: 'signIn',
         Component: SignIn
       },
@@ -49,14 +58,29 @@ const router = createBrowserRouter([
       {
         path: '/packages/:id',
         Component: PackageDetails
-      }
+      },
+      {
+        path: 'allStories',
+        Component: AllStories
+      },
+      {
+        path: 'story/:id',
+        Component: SingleStories
+      },
+      {
+        path: 'singleGuide/:id',
+        Component: GuideDetails
+      },
     ]
   },
   {
     path: 'dashboard',
-    Component: DashBoardLayout,
+    element: <PrivateRoute>
+      <DashBoardLayout></DashBoardLayout>
+    </PrivateRoute>,
     children: [
       {
+        index:true,
         path: 'profile',
         Component: Profile
       },

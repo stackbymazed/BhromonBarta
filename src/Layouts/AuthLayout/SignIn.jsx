@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Lottie from 'lottie-react';
 import animationData from '../../../Animation.json';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
 import GoogleLogIn from '../../Utilis/GoogleLogIn/GoogleLogIn';
 import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const { userSignin, resetPassword } = useContext(AuthContext);
+    // const location = useLocation()
+    const navigate = useNavigate()
 
     const {
         register,
@@ -20,6 +22,7 @@ const SignIn = () => {
         userSignin(data.email, data.password)
             .then((res) => {
                 toast.success("User logged in:");
+                navigate('/')
             })
             .catch((err) => {
                 toast.error("Login error:", err.message);
@@ -67,12 +70,27 @@ const SignIn = () => {
                             type="password"
                             {...register("password", {
                                 required: "Password is required",
+                                minLength: {
+                                    value: 6,
+                                    message: "Password must be at least 6 characters long",
+                                },
+                                validate: {
+                                    hasUppercase: (value) =>
+                                        /[A-Z]/.test(value) || "Password must contain at least one uppercase letter",
+                                    hasLowercase: (value) =>
+                                        /[a-z]/.test(value) || "Password must contain at least one lowercase letter",
+                                    hasNumber: (value) =>
+                                        /[0-9]/.test(value) || "Password must contain at least one number",
+                                },
                             })}
                             className="input input-bordered w-full"
                             placeholder="Your password"
                         />
-                        {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                        {errors.password && (
+                            <p className="text-red-500 text-sm">{errors.password.message}</p>
+                        )}
                     </div>
+
 
                     {/* Forgot Password */}
                     <div className="text-right">
