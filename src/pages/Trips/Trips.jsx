@@ -15,7 +15,7 @@ const Trips = () => {
     }
   });
 
-  if (isLoading) return <p className="text-center mt-10">Loading packages...</p>;
+  if (isLoading) return <p className="text-center mt-10"><span className="loading loading-spinner loading-xl"></span></p>;
   if (error) return <p className="text-center text-red-500">Failed to load packages.</p>;
 
   return (

@@ -18,7 +18,7 @@ const useAdmin = () => {
   });
 
   const isAdmin = userRoleData?.role === 'admin';
-  console.log(isAdmin)
+  // console.log(isAdmin)
 
   return { isAdmin, isLoading};
 };

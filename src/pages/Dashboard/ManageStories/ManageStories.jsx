@@ -46,10 +46,10 @@ const ManageStories = () => {
             const data = await response.json();
 
             if (data?.data?.url) {
-                console.log("Uploaded URL:", data.data.url);
+                // console.log("Uploaded URL:", data.data.url);
                 return data.data.url;
             } else {
-                console.error("Image upload failed:", data);
+                // console.error("Image upload failed:", data);
                 return null;
             }
         } catch (error) {
@@ -68,7 +68,7 @@ const ManageStories = () => {
 
     const removePhotoMutation = useMutation({
         mutationFn: async ({ storyId, photoUrl }) => {
-            console.log(storyId)
+            // console.log(storyId)
             await useAxiosUrl.delete(`/stories/${storyId}`, {
                 data: { photoUrl },
             });

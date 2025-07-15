@@ -21,7 +21,7 @@ const JoinGuide = () => {
             status: "pending",
             submittedAt: new Date()
         };
-        console.log(applicationData)
+        // console.log(applicationData)
         try {
             const res = await AxiosSecure.post("/guide-applications", applicationData);
 

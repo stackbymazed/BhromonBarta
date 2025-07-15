@@ -94,7 +94,7 @@ const PaymentForm = ({ closeModal, selectedBooking }) => {
 
                 }
                 catch (error) {
-                    console.log(error)
+                    // console.log(error)
                 }
 
                 // setProcessing(false);

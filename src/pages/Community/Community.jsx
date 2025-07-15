@@ -26,7 +26,7 @@ const CommunityPage = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center mt-10">Loading stories...</p>;
+  if (isLoading) return <p className="text-center mt-10"><span className="loading loading-spinner loading-xl"></span></p>;
   if (error) return <p className="text-center text-red-500 mt-10">Error loading community stories.</p>;
 
   return (

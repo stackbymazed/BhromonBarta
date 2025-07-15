@@ -31,7 +31,7 @@ const AddPackage = () => {
                 status: "available",
             };
 
-            console.log(packageData)
+            // console.log(packageData)
             const res = await axiosSecure.post("/packages", packageData);
             if (res.data.insertedId) {
                 Swal.fire({

@@ -38,7 +38,7 @@ const AdminProfile = () => {
         }
     }, [paymentsData]);
 
-    console.log(totalPayData);
+    // console.log(totalPayData);
 
 
 
@@ -58,7 +58,7 @@ const AdminProfile = () => {
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         const { _id, ...updateFields } = editData;
-        console.log(updateFields, _id)
+        // console.log(updateFields, _id)
         try {
             await axiosSecure.patch(`/users/update/${updateFields?.email}`, updateFields);
             Swal.fire('Updated!', 'Profile updated successfully.', 'success');

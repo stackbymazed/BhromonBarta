@@ -48,7 +48,7 @@ const PackageDetails = () => {
         }
         // console.log(typeof user.role)
     })
-    console.log(guides)
+    // console.log(guides)
     useEffect(() => {
         // Fetch package
         axiosSecure.get(`/packages/${id}`)
@@ -63,9 +63,9 @@ const PackageDetails = () => {
         register('tourDate', { required: 'Tour date is required' });
     }, [axiosSecure, id, register]);
 
-    console.log(guides)
+    // console.log(guides)
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         setLoading(true);
         const booking = {
             packageId: packageData._id,

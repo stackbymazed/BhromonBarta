@@ -15,7 +15,7 @@ const SignUp = () => {
     const { createUser, upDateUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     const axiosUrl = useAxios()
     const axiosSecure = useAxiosSecure()
     const {
@@ -38,9 +38,9 @@ const SignUp = () => {
                 method: "POST",
                 body: formData,
             });
-            console.log(res)
+            // console.log(res)
             const result = await res.json();
-            console.log(result)
+            // console.log(result)
             if (result.success) {
                 const imageUrl = result.data.url;
 
@@ -51,7 +51,7 @@ const SignUp = () => {
                     image: imageUrl,
                 };
 
-                console.log("✅ User Registered:", userData);
+                // console.log("✅ User Registered:", userData);
                 createUser(data.email, data.password)
                     .then((userCredential) => {
                         const user = userCredential.user;

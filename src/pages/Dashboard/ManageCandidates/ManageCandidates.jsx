@@ -35,7 +35,7 @@ const ManageCandidates = () => {
 
     // ✅ Updated Accept handler (mutation removed)
     const handleAccept = async (applicant) => {
-        console.log(applicant)
+        // console.log(applicant)
         Swal.fire({
             title: 'Are you sure?',
             text: `Promote ${applicant.applicantEmail} to tour guide?`,

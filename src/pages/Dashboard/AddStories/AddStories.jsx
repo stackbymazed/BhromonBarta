@@ -45,7 +45,7 @@ const AddStory = () => {
             date: new Date().toISOString()
         };
 
-        console.log(story)
+        // console.log(story)
         // Send to backend (replace with your own endpoint or Firebase)
         try {
             const { data } = await axiosSecure.post("/stories", story)
