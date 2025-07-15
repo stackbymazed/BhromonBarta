@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { motion } from 'framer-motion';
 
 const Trips = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,10 +16,35 @@ const Trips = () => {
     }
   });
 
+  const bgVariants = {
+  animate: {
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    transition: {
+      duration: 25,
+      repeat: Infinity,
+      ease: "linear",
+    },
+  },
+};
   if (isLoading) return <p className="text-center mt-10"><span className="loading loading-spinner loading-xl"></span></p>;
   if (error) return <p className="text-center text-red-500">Failed to load packages.</p>;
 
   return (
+    <motion.div
+        className={`
+          min-h-screen 
+          bg-gradient-to-r 
+          from-pink-100 via-yellow-100 to-green-100 
+          dark:from-purple-900 dark:via-blue-900 dark:to-black 
+          bg-[length:200%_200%] 
+          animate-bg
+          dark:text-white
+          p-6
+        `}
+        variants={bgVariants}
+        animate="animate"
+        style={{ minHeight: '100vh' }}
+      >
     <div className="max-w-7xl mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-center mb-10">Available Tour Packages</h2>
 
@@ -55,6 +81,7 @@ const Trips = () => {
         ))}
       </div>
     </div>
+    </motion.div>
   );
 };
 

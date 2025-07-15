@@ -48,8 +48,46 @@ const DashBoardLayout = () => {
                 </div>
 
                 {/* Route Outlet */}
-                <Outlet />
-                {/* <h1>asdfasdfasdafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1> */}
+                <div className='min-h-[80vh]'>
+                    <Outlet />
+                </div>
+                <footer class="bg-gradient-to-b  from-blue-100 via-blue-200 to-blue-300 text-black py-6 mt-10">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+
+                        <div class="text-center md:text-left">
+                            <h2 class="text-lg font-semibold text-black">BhromonBarta</h2>
+                            <p class="text-sm text-black">© 2025 All rights reserved.</p>
+                        </div>
+
+                        <div class="flex space-x-6">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6 text-blue-600 hover:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.897v-2.89h2.541V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.462h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" />
+                                </svg>
+                            </a>
+
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6 text-sky-400 hover:text-sky-300" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557a9.835 9.835 0 01-2.828.775A4.932 4.932 0 0023.337 3c-.951.564-2.005.974-3.127 1.195A4.92 4.92 0 0016.616 3c-2.736 0-4.95 2.214-4.95 4.95 0 .388.044.765.127 1.125-4.113-.206-7.766-2.177-10.21-5.172a4.93 4.93 0 00-.668 2.488c0 1.715.873 3.23 2.197 4.116a4.904 4.904 0 01-2.243-.62v.063c0 2.396 1.704 4.396 3.963 4.85a4.935 4.935 0 01-2.237.085 4.935 4.935 0 004.6 3.417 9.874 9.874 0 01-6.102 2.105c-.396 0-.787-.023-1.172-.068A13.933 13.933 0 007.548 21c9.057 0 14.01-7.504 14.01-14.01 0-.213-.005-.425-.014-.636A10.01 10.01 0 0024 4.557z" />
+                                </svg>
+                            </a>
+
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6 text-pink-500 hover:text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.36 3.608 1.335.975.975 1.273 2.242 1.335 3.608.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.36 2.633-1.335 3.608-.975.975-2.242 1.273-3.608 1.335-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.36-3.608-1.335-.975-.975-1.273-2.242-1.335-3.608C2.175 15.647 2.163 15.268 2.163 12s.012-3.584.07-4.85c.062-1.366.36-2.633 1.335-3.608C4.543 2.593 5.81 2.295 7.176 2.233 8.442 2.175 8.821 2.163 12 2.163zm0 1.838c-3.137 0-3.502.012-4.73.068-1.144.052-1.758.24-2.169.399a3.993 3.993 0 00-1.476.962 3.993 3.993 0 00-.962 1.476c-.159.411-.347 1.025-.399 2.169-.056 1.228-.068 1.593-.068 4.73s.012 3.502.068 4.73c.052 1.144.24 1.758.399 2.169a3.993 3.993 0 00.962 1.476 3.993 3.993 0 001.476.962c.411.159 1.025.347 2.169.399 1.228.056 1.593.068 4.73.068s3.502-.012 4.73-.068c1.144-.052 1.758-.24 2.169-.399a3.993 3.993 0 001.476-.962 3.993 3.993 0 00.962-1.476c.159-.411.347-1.025.399-2.169.056-1.228.068-1.593.068-4.73s-.012-3.502-.068-4.73c-.052-1.144-.24-1.758-.399-2.169a3.993 3.993 0 00-.962-1.476 3.993 3.993 0 00-1.476-.962c-.411-.159-1.025-.347-2.169-.399-1.228-.056-1.593-.068-4.73-.068zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
+                                </svg>
+                            </a>
+
+                            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6 text-red-600 hover:text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 15l5.19-3L10 9v6z" />
+                                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V15H7.897v-2.89h2.541V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.462h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+
             </div>
 
             {/* Sidebar */}

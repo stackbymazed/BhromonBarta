@@ -3,6 +3,7 @@ import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { motion } from 'framer-motion';
 
 const icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
@@ -12,8 +13,32 @@ const icon = L.icon({
 
 const AboutUS = () => {
   const position = [22.8167, 91.1000]; // Noakhali coordinates
-
+const bgVariants = {
+  animate: {
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    transition: {
+      duration: 25,
+      repeat: Infinity,
+      ease: "linear",
+    },
+  },
+};
   return (
+    <motion.div
+        className={`
+          min-h-screen 
+          bg-gradient-to-r 
+          from-pink-100 via-yellow-100 to-green-100 
+          dark:from-purple-900 dark:via-blue-900 dark:to-black 
+          bg-[length:200%_200%] 
+          animate-bg
+          dark:text-white
+          p-6
+        `}
+        variants={bgVariants}
+        animate="animate"
+        style={{ minHeight: '100vh' }}
+      >
     <div className="max-w-6xl mx-auto px-4 py-10 ">
       {/* Developer Info */}
       <div className="">
@@ -209,6 +234,7 @@ const AboutUS = () => {
 
 
     </div>
+    </motion.div>
   );
 };
 

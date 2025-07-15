@@ -25,6 +25,7 @@ import GuideDetails from "../pages/GuideDetails/GuideDetails";
 import Trips from "../pages/Trips/Trips";
 import PrivateRoute from "../Utilis/PrivateRoute/PrivateRoute";
 import DashboardWel from "../pages/Dashboard/DashboardWel/DashboardWel";
+import GuidesProfile from "../pages/GuidesProfile/GuidesProfile";
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'trips',
         Component: Trips
+      },
+      {
+        path: 'guides-profile',
+        Component: GuidesProfile
       },
       {
         path: 'signIn',

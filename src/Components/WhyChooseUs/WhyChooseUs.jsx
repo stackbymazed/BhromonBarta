@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { Link } from "react-router"; 
 
 const stats = [
   { value: "120+", label: "Total Destination" },
@@ -10,12 +10,11 @@ const stats = [
   { value: "7k+", label: "Positive Reviews" },
 ];
 
-// Optional: Duplicate stats for smooth infinite loop
-const loopStats = [...stats, ...stats];
+const loopStats = [...stats, ...stats, ...stats]; // More copies = smoother loop
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-base-100 py-12 px-4 md:px-16 overflow-hidden">
+    <section className="py-16 px-4 md:px-16 overflow-hidden dark:text-white">
       {/* TOP SECTION */}
       <div className="grid md:grid-cols-2 items-center gap-12">
         {/* IMAGE BLOCK */}
@@ -24,7 +23,7 @@ const WhyChooseUs = () => {
           <img
             src="https://i.ibb.co/LdCsmy8j/choos-us-thumb.png"
             alt="Traveler"
-            className="w-full h-[360px] object-contain rounded-lg border-4 border-gray-100 shadow-2xl hover:shadow-2xs"
+            className="w-full h-[360px] object-contain rounded-lg border-4 border-gray-100 shadow-2xl hover:shadow-md"
           />
           <div className="bg-blue-900 text-white px-4 py-2 mt-4 rounded-lg w-fit font-bold text-md italic">
             <span className="text-2xl font-extrabold mr-1">10+</span>Years of Experience
@@ -33,47 +32,37 @@ const WhyChooseUs = () => {
 
         {/* TEXT BLOCK */}
         <div>
-          {/* <p className="font-bold text-blue-700 text-lg">Why Choose Us</p> */}
-          <h2 className="text-3xl font-bold mt-2">Plan Your Trip with BhromonBarta</h2>
-          <p className="text-gray-600 mt-4">
-            Holistically optimize proactive strategic theme areas rather than effective
-            manufactured products create.
+          <p className="text-red-500 font-semibold text-lg dark:text-white">Why Choose Us</p>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-gray-800 dark:text-white">
+            Plan Your Trip with BhromonBarta
+          </h2>
+          <p className="text-gray-600 dark:text-white mt-4 text-md">
+            Holistically optimize proactive strategic theme areas rather than effective manufactured products create.
           </p>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <p>
-              <FaCheck className="inline text-blue-700 mr-2" />
-              Travel Plan
-            </p>
-            <p>
-              <FaCheck className="inline text-blue-700 mr-2" />
-              Cheap Rates
-            </p>
-            <p>
-              <FaCheck className="inline text-blue-700 mr-2" />
-              Hand-picked Tour
-            </p>
-            <p>
-              <FaCheck className="inline text-blue-700 mr-2" />
-              Private Guide
-            </p>
+          <div className="grid grid-cols-2 gap-3 mt-6 text-gray-700 dark:text-white">
+            <p><FaCheck className="inline text-blue-700 mr-2" /> Travel Plan</p>
+            <p><FaCheck className="inline text-blue-700 mr-2" /> Cheap Rates</p>
+            <p><FaCheck className="inline text-blue-700 mr-2" /> Hand-picked Tour</p>
+            <p><FaCheck className="inline text-blue-700 mr-2" /> Private Guide</p>
           </div>
-          <Link to='about'>
-            <button className="btn btn-outline mt-6">Contact Us</button>
+          <Link to="/about">
+            <button className="btn btn-outline mt-6 dark:text-white">Contact Us</button>
           </Link>
         </div>
       </div>
 
-      {/* BOTTOM STATS SECTION - INFINITE SCROLL */}
-      <div className="mt-20 pt-6 overflow-hidden relative whitespace-nowrap border-t">
+      {/* BOTTOM STATS SECTION */}
+      <div className="mt-20 pt-6 overflow-hidden relative border-t border-gray-200">
+        {/* Optional background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-white to-blue-50 opacity-60 z-[-1]" />
+        
         <motion.div
-          className="flex gap-10"
-          animate={{
-            x: ["0%", "-50%"],
-          }}
+          className="flex gap-10 whitespace-nowrap"
+          animate={{ x: ["0%", "-100%"] }}
           transition={{
             repeat: Infinity,
             repeatType: "loop",
-            duration: 20,
+            duration: 40,
             ease: "linear",
           }}
         >

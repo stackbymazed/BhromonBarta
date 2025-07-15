@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { motion } from "framer-motion";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useNavigate } from 'react-router';
@@ -13,31 +13,45 @@ const TravelGuide = () => {
     const [guides, setGuides] = useState([]);
 
     useEffect(() => {
-        // Fetch random 3 packages
         axiosSecure.get("/packages")
             .then(res => setPackages(res.data))
             .catch(err => console.error(err));
 
-        // Fetch random 6 tour guides
         axiosSecure.get("/tour-guides")
             .then(res => setGuides(res.data))
             .catch(err => console.error(err));
     }, [axiosSecure]);
 
     return (
-        <div className="px-4 py-10 max-w-7xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
+        <motion.div
+            className="px-4 py-10 max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+        >
+            <motion.h1
+                className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+            >
                 Tourism and Travel Guide - Bangladesh
-            </h1>
+            </motion.h1>
 
             <Tabs>
-                <TabList className="flex border-b-2 border-blue-500 rounded-t-lg overflow-hidden text-base font-semibold mb-6 bg-gray-50 dark:bg-gray-900">
-                    <Tab className="py-3 px-6 cursor-pointer transition-all duration-300 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900"
-                        selectedClassName="bg-blue-500 text-white shadow-md border-b-0">
+                <TabList className="flex border-b-2 border-blue-500 rounded-t-lg overflow-hidden text-base font-semibold mb-6  dark:bg-gray-900">
+                    <Tab
+                        className="py-3 px-6 cursor-pointer transition-all duration-300 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900"
+                        selectedClassName="bg-blue-500 text-white shadow-md border-b-0"
+                    >
                         Our Packages
                     </Tab>
-                    <Tab className="py-3 px-6 cursor-pointer transition-all duration-300 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900"
-                        selectedClassName="bg-blue-500 text-white shadow-md border-b-0">
+                    <Tab
+                        className="py-3 px-6 cursor-pointer transition-all duration-300 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900"
+                        selectedClassName="bg-blue-500 text-white shadow-md border-b-0"
+                    >
                         Meet Our Tour Guides
                     </Tab>
                 </TabList>
@@ -45,8 +59,15 @@ const TravelGuide = () => {
                 {/* Packages */}
                 <TabPanel>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {packages.map(pkg => (
-                            <div key={pkg._id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full">
+                        {packages.map((pkg, index) => (
+                            <motion.div
+                                key={pkg._id}
+                                className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                            >
                                 <img
                                     src={pkg?.gallery?.[0] || "https://via.placeholder.com/400x300?text=No+Image"}
                                     alt={pkg.title}
@@ -64,7 +85,7 @@ const TravelGuide = () => {
                                         View Package
                                     </button>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </TabPanel>
@@ -73,12 +94,23 @@ const TravelGuide = () => {
                 <TabPanel>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
                         {guides.length === 0 ? (
-                            <div className="text-center text-gray-400 dark:text-gray-500 italic col-span-3">
+                            <motion.div
+                                className="text-center text-gray-400 dark:text-gray-500 italic col-span-3"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                            >
                                 No tour guides found.
-                            </div>
+                            </motion.div>
                         ) : (
-                            guides.map(guide => (
-                                <div key={guide._id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full p-4">
+                            guides.map((guide, index) => (
+                                <motion.div
+                                    key={guide._id}
+                                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full p-4"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                >
                                     <img
                                         src={guide.photoURL || "https://via.placeholder.com/400x300?text=No+Image"}
                                         alt={guide.name}
@@ -88,19 +120,19 @@ const TravelGuide = () => {
                                         <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{guide.name}</h2>
                                         <p className="text-sm text-gray-600 dark:text-gray-400">Email: {guide.email}</p>
                                         <button
-                                            onClick={() => navigate(`/guides/${guide._id}`)}
+                                            onClick={() => navigate(`/singleGuide/${guide._id}`)}
                                             className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-all duration-300"
                                         >
                                             Details
                                         </button>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))
                         )}
                     </div>
                 </TabPanel>
             </Tabs>
-        </div>
+        </motion.div>
     );
 };
 

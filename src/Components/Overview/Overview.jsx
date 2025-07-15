@@ -1,12 +1,18 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Overview = () => {
   return (
-    <section className="bg-white dark:bg-gray-900 py-16 px-4 md:px-20 transition-colors duration-300">
+    <section className="dark:text-white dark:bg-gray-900 py-16 px-4 md:px-20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
         {/* Text Content */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
             Explore Your Destination with BhromonBarta
           </h2>
@@ -18,31 +24,34 @@ const Overview = () => {
             <li>Visual experience through image previews</li>
             <li>Optimized for all devices</li>
           </ul>
-        </div>
+        </motion.div>
 
-        {/* Image Grid Instead of Video */}
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src="https://i.ibb.co/d0mms3pK/coxsjpg.jpg"
-            alt="Nature spot"
-            className="rounded-lg object-cover h-40 w-full shadow-md"
-          />
-          <img
-            src="https://i.ibb.co/vCRj4w76/mela.jpg"
-            alt="Trekking"
-            className="rounded-lg object-cover h-40 w-full shadow-md"
-          />
-          <img
-            src="https://i.ibb.co/dsKN3J9y/Saint.jpg"
-            alt="Camping"
-            className="rounded-lg object-cover h-40 w-full shadow-md"
-          />
-          <img
-            src="https://i.ibb.co/WLpfDp6/Sajek-Valley.jpg"
-            alt="Beach"
-            className="rounded-lg object-cover h-40 w-full shadow-md"
-          />
-        </div>
+        {/* Image Grid */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 gap-4"
+        >
+          {[
+            "https://i.ibb.co/d0mms3pK/coxsjpg.jpg",
+            "https://i.ibb.co/vCRj4w76/mela.jpg",
+            "https://i.ibb.co/dsKN3J9y/Saint.jpg",
+            "https://i.ibb.co/WLpfDp6/Sajek-Valley.jpg",
+          ].map((img, index) => (
+            <motion.img
+              key={index}
+              src={img}
+              alt={`img-${index}`}
+              className="rounded-lg object-cover h-40 w-full shadow-md"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
