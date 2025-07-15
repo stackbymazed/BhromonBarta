@@ -110,8 +110,8 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 
 ## 👨‍💻 Developer Info
 
-- **👤 Name:** Your Name  
-- **📧 Email:** your.email@example.com  
+- **👤 Name:** Mazjedul Islam Nayem  
+- **📧 Email:** majedulislam223311@gmail.com  
 - **🌐 Portfolio:** [yourportfolio.com](https://mazed-portfolio.netlify.app/)  
 
 
