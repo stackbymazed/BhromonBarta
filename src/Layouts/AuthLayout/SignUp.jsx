@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxios from '../../hooks/useAxios';
 import { toast } from 'react-toastify';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const SignUp = () => {
 
@@ -16,6 +17,7 @@ const SignUp = () => {
     const location = useLocation()
     console.log(location)
     const axiosUrl = useAxios()
+    const axiosSecure = useAxiosSecure()
     const {
         register,
         handleSubmit,
@@ -66,7 +68,7 @@ const SignUp = () => {
                                     role: 'tourist',
                                 };
 
-                                axiosUrl.post(`/users`, newUser)
+                                axiosSecure.post(`/users`, newUser)
                                     .then(() => {
                                         Swal.fire({
                                             position: "top-end",

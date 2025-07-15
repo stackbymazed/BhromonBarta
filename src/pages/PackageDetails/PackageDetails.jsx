@@ -75,7 +75,7 @@ const PackageDetails = () => {
             touristImage: user?.photoURL,
             price: packageData.price,
             tourDate: data.tourDate,
-            guideId: data.guideId,
+            guideEmail: data.guideId,
             status: 'pending',
         };
 

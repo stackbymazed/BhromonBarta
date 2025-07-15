@@ -4,6 +4,7 @@ import { FacebookShareButton, FacebookIcon } from 'react-share';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import useAxios from '../../hooks/useAxios';
 
 const getAuthorColor = (author) => {
   const colors = ['bg-teal-100', 'bg-lime-100', 'bg-rose-100', 'bg-sky-100', 'bg-amber-100'];
@@ -13,13 +14,14 @@ const getAuthorColor = (author) => {
 
 const CommunityPage = () => {
   const axiosUrl = useAxiosSecure();
+  const axiosSecure = useAxiosSecure()
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const { data: stories = [], isLoading, error } = useQuery({
     queryKey: ['allStories'],
     queryFn: async () => {
-      const res = await axiosUrl.get('/com-stories');
+      const res = await axiosSecure.get('/com-stories');
       return res.data;
     },
   });
@@ -52,7 +54,7 @@ const CommunityPage = () => {
               <div className="p-6 flex flex-col justify-between flex-1">
                 <div>
                   <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-white">{story.title}</h3>
-                  <p className={`text-sm font-medium mb-4 px-3 py-1 rounded-full inline-block text-gray-800 dark:text-gray-200 ${authorBg}`}>
+                  <p className={`text-sm font-medium mb-4 px-3 py-1 rounded-full inline-block text-gray-800 dark:text-white ${authorBg}`}>
                     by {story.author}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-4">{story.description}</p>

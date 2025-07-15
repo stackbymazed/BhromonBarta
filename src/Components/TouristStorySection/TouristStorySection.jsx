@@ -4,6 +4,7 @@ import { FacebookShareButton, FacebookIcon } from 'react-share';
 import { useNavigate } from 'react-router';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../Contexts/AuthContext/AuthContext';
+import useAxios from '../../hooks/useAxios';
 
 const getAuthorColor = (author) => {
   const colors = ['bg-blue-100', 'bg-green-100', 'bg-yellow-100', 'bg-pink-100', 'bg-purple-100'];
@@ -14,16 +15,17 @@ const getAuthorColor = (author) => {
 const TouristStorySection = () => {
   const navigate = useNavigate();
   const axiosUrl = useAxiosSecure();
+  const axiosSecure = useAxios()
   const {user} = use(AuthContext)
   const { data: stories = [], isLoading, error } = useQuery({
     queryKey: ['stories'],
     queryFn: async () => {
-      const res = await axiosUrl.get('/stories?limit=4');
+      const res = await axiosSecure.get('/stories?limit=4');
       return res.data;
     },
   });
 
-  if (isLoading) return <p className="text-center mt-10">Loading stories...</p>;
+  if (isLoading) return <p className="text-center mt-10"><span className="loading loading-spinner loading-xl"></span></p>;
   if (error) return <p className="text-center mt-10 text-red-500">Error loading stories</p>;
 
   return (

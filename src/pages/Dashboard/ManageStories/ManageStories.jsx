@@ -13,7 +13,7 @@ import { Navigation } from "swiper/modules";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
 
 const ManageStories = () => {
-     const { user } = use(AuthContext)
+    const { user } = use(AuthContext)
     const queryClient = useQueryClient();
     const [editStory, setEditStory] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,10 +23,8 @@ const ManageStories = () => {
     const useAxiosUrl = useAxios();
     const axiosSecure = useAxiosSecure();
 
-   
-    console.log(user?.email)
     const { data: stories = [], isLoading } = useQuery({
-        queryKey: ["stories",user?.email],
+        queryKey: ["stories", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/stories/${user?.email}`);
             return res.data;
@@ -36,13 +34,30 @@ const ManageStories = () => {
     const uploadToImgbb = async (imageFile) => {
         const formData = new FormData();
         formData.append("image", imageFile);
-        const res = await axios.post(
-            `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_BB_API_KEY}`,
-            formData
-        );
-        console.log(res.data.data.url);
-        return res.data.data.url;
+
+        const apiKey = import.meta.env.VITE_IMG_BB_API_KEY;
+
+        try {
+            const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data?.data?.url) {
+                console.log("Uploaded URL:", data.data.url);
+                return data.data.url;
+            } else {
+                console.error("Image upload failed:", data);
+                return null;
+            }
+        } catch (error) {
+            console.error("Image upload error:", error);
+            return null;
+        }
     };
+
 
     const deleteMutation = useMutation({
         mutationFn: async (id) => {
@@ -53,7 +68,8 @@ const ManageStories = () => {
 
     const removePhotoMutation = useMutation({
         mutationFn: async ({ storyId, photoUrl }) => {
-            await useAxiosUrl.delete(`/stories/${storyId}/photos`, {
+            console.log(storyId)
+            await useAxiosUrl.delete(`/stories/${storyId}`, {
                 data: { photoUrl },
             });
         },
@@ -153,7 +169,7 @@ const ManageStories = () => {
         }
     };
 
-    if (isLoading) return <div className="p-6 text-center">Loading...</div>;
+    if (isLoading) return <div className="p-6 text-center"><span className="loading loading-spinner loading-xl"></span></div>;
 
     return (
         <>

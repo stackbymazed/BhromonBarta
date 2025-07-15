@@ -58,37 +58,14 @@ const Footer = () => {
             </a>
           </div>
         </div>
-      </section>
-
-      {/* Actual footer */}
-      <footer className="bg-gradient-to-r from-blue-600 to-purple-700 text-gray-100 dark:text-gray-200 px-6 py-8">
         <div className="max-w-6xl mx-auto flex flex-col items-center space-y-6">
-
-          {/* Navigation links */}
-          <nav className="flex flex-wrap justify-center gap-5 text-sm font-medium">
-            {navLinks.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                className={({ isActive }) =>
-                  isActive
-                    ? 'text-yellow-300 underline'
-                    : 'hover:text-yellow-300 transition-colors duration-300'
-                }
-              >
-                {label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <hr className="w-full border-yellow-400/40" />
-
+          <hr className="w-full border-yellow-400/40 mt-2" />
           {/* Copyright */}
           <p className="text-center text-xs text-yellow-300/90">
             © {new Date().getFullYear()} YourBrand. All rights reserved.
           </p>
         </div>
-      </footer>
+      </section>
     </>
   );
 };

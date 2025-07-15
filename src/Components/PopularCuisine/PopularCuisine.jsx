@@ -9,19 +9,19 @@ const PopularCuisine = () => {
     {
       id: 'dish2',
       name: 'Panta Bhat',
-      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
+      image: 'https://i.ibb.co/Ps27rxx7/Panta-Ilish.jpg',
       description: 'Fermented rice soaked in water, traditionally eaten with fried hilsha or chili.',
     },
     {
       id: 'dish3',
       name: 'Bhuna Khichuri',
-      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
+      image: 'https://i.ibb.co/6JPYwS2v/Murgir-Bhuna-Khichuri.jpg',
       description: 'A fragrant rice and lentil dish cooked with aromatic spices, often enjoyed during festivals.',
     },
     {
       id: 'dish4',
       name: 'Mishti Doi',
-      image: 'https://nijhoom.b-cdn.net/wp-content/uploads/2023/04/bangladeshi-food-cover-768x403-o.jpg',
+      image: 'https://i.ibb.co/rRyGMB1F/images.webp',
       description: 'Sweetened fermented yogurt dessert, a favorite Bengali delicacy.',
     },
   ];

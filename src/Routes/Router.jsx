@@ -24,6 +24,7 @@ import SingleStories from "../pages/SingleStories/SingleStories";
 import GuideDetails from "../pages/GuideDetails/GuideDetails";
 import Trips from "../pages/Trips/Trips";
 import PrivateRoute from "../Utilis/PrivateRoute/PrivateRoute";
+import DashboardWel from "../pages/Dashboard/DashboardWel/DashboardWel";
 
 
 const router = createBrowserRouter([
@@ -80,7 +81,10 @@ const router = createBrowserRouter([
     </PrivateRoute>,
     children: [
       {
-        index:true,
+        index: true,
+        Component: DashboardWel
+      },
+      {
         path: 'profile',
         Component: Profile
       },

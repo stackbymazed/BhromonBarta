@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const stats = [
   { value: "120+", label: "Total Destination" },
@@ -33,7 +34,7 @@ const WhyChooseUs = () => {
         {/* TEXT BLOCK */}
         <div>
           {/* <p className="font-bold text-blue-700 text-lg">Why Choose Us</p> */}
-          <h2 className="text-3xl font-bold mt-2">Plan Your Trip with TBhromonBarta</h2>
+          <h2 className="text-3xl font-bold mt-2">Plan Your Trip with BhromonBarta</h2>
           <p className="text-gray-600 mt-4">
             Holistically optimize proactive strategic theme areas rather than effective
             manufactured products create.
@@ -56,7 +57,9 @@ const WhyChooseUs = () => {
               Private Guide
             </p>
           </div>
-          <button className="btn btn-outline mt-6">Contact Us</button>
+          <Link to='about'>
+            <button className="btn btn-outline mt-6">Contact Us</button>
+          </Link>
         </div>
       </div>
 
