@@ -183,7 +183,7 @@ const PackageDetails = () => {
                     <div className="space-y-3">
                         {packageData.tourPlan.map((dayPlan, idx) => (
                             <div key={idx} className="bg-blue-50 p-4 rounded-lg shadow">
-                                <div className="font-semibold text-lg mb-1">
+                                <div className="font-semibold text-lg mb-1 mx-auto">
                                     <span className="inline-block px-3 py-1 bg-blue-600 text-white rounded mr-3">
                                         {dayPlan.day}
                                     </span>

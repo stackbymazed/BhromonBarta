@@ -61,7 +61,7 @@ const MyBooking = () => {
         setModalOpen(false);
     };
 
-    if (isLoading) return <p className="text-center py-8">Loading...</p>;
+    if (isLoading) return <p className="text-center py-8"><span className="loading loading-spinner loading-xl"></span></p>;
 
     return (
         <div className="p-4 sm:p-6 max-w-6xl mx-auto">

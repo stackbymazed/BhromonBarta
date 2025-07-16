@@ -36,7 +36,7 @@ const GuidesProfile = () => {
     },
   };
 
-  if (loadingGuides || loadingStories) return <p className="p-4">Loading...</p>;
+  if (loadingGuides || loadingStories) return <p className="p-4"><span className="loading loading-spinner loading-xl"></span></p>;
 
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);

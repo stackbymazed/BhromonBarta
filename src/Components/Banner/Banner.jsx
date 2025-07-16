@@ -46,7 +46,7 @@ const Banner = () => {
         {[image1, image2, image3, image4].map((bg, i) => (
           <div key={i}>
             <div
-              className="w-full h-[90vh] bg-cover bg-center flex items-center justify-center text-center relative"
+              className="w-full lg:h-[90vh] h-[50vh] bg-cover bg-center flex items-center justify-center text-center relative"
               style={{ backgroundImage: `url(${bg})` }}
             >
               {/* Overlay */}

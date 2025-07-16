@@ -3,7 +3,7 @@ import { FaGlobeAsia, FaUserFriends, FaRoute } from "react-icons/fa";
 
 const DashboardWel = () => {
   return (
-    <div className="flex items-center justify-center h-[80vh] px-4">
+    <div className="flex items-center justify-center lg:h-[80vh] px-4 my-5">
       <div className="bg-white dark:bg-gray-800 shadow-xl rounded-xl p-10 max-w-3xl text-center">
         <div className="flex justify-center mb-6">
           <FaGlobeAsia className="text-5xl text-green-500" />
