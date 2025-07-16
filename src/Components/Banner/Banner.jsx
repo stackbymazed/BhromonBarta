@@ -4,9 +4,9 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 import image1 from '../../assets/Saint.jpg';
-import image2 from '../../assets/coxsjpg (1).jpg';
+import image2 from '../../assets/cox.jpg';
 import image3 from '../../assets/Sajek_Valley.jpg';
-import image4 from '../../assets/mela (1).jpg';
+import image4 from '../../assets/melah.jpg';
 
 const Banner = () => {
   const sliderRef = useRef(null);
