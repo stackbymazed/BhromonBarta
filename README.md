@@ -8,7 +8,7 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 ## 🔐 Admin Login Info
 
 - **Email:** admin@bhromon.com  
-- **Password:** Admin@12345
+- **Password:**  Admin12#
 
 ---
 
