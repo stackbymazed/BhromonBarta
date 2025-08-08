@@ -2,8 +2,6 @@
 
 Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68.web.app/)
 
-📽️ Requirement Explanation Video: *[Add your video link here]*  
-📁 Assignment: `assignment12_category_003`
 
 ---
 
