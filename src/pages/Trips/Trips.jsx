@@ -72,7 +72,7 @@ const Trips = () => {
               </div>
               <button
                 onClick={() => navigate(`/packages/${tour._id}`)}
-                className="mt-5 w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-2 rounded hover:from-indigo-600 hover:to-purple-600 transition"
+                className="mt-5 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded hover:from-indigo-600 hover:to-purple-600 transition"
               >
                 View Details
               </button>
