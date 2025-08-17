@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { motion } from 'framer-motion';
+import { toast } from "react-toastify";
 
 const icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
@@ -23,6 +24,11 @@ const AboutUS = () => {
       },
     },
   };
+  const handleSubmit = e => {
+    e.preventDefault()
+    toast.success('submitted !');
+    e.target.reset();
+  }
   return (
     <motion.div
       className={`
@@ -207,7 +213,7 @@ const AboutUS = () => {
               required
             ></textarea>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" onClick={handleSubmit} className="btn btn-primary">
               Submit
             </button>
           </form>

@@ -109,7 +109,7 @@ const Navbar = () => {
   return (
     <div
   className={`
-    navbar sticky top-0 z-50 w-full px-4 backdrop-blur-md shadow-md flex items-center justify-between
+    navbar sticky  top-0 z-50 w-full lg:px-20 md:px-12 px-6 backdrop-blur-md shadow-md flex items-center justify-between
     ${theme === 'dark' ? 'bg-blue-500  text-white' : ' bg-blue-500 text-white'}
   `}
 >
@@ -162,7 +162,7 @@ const Navbar = () => {
 
       {/* Center: Desktop Nav */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-6">
+        <ul className="menu menu-horizontal px-1 gap-2">
           {React.Children.map(links.props.children, (child, idx) => (
             <motion.li
               key={idx}

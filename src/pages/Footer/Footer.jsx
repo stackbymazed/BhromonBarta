@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Logo from '../../Utilis/Logo/Logo';
 
 const Footer = () => {
@@ -30,7 +30,7 @@ const Footer = () => {
           {/* Social icons */}
           <div className="flex space-x-6 text-2xl">
             <a
-              href="https://github.com/"
+              href="https://github.com/stackbymazed"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -39,7 +39,7 @@ const Footer = () => {
               <FaGithub />
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/mazedul-islam22/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -48,13 +48,13 @@ const Footer = () => {
               <FaLinkedin />
             </a>
             <a
-              href="https://twitter.com/"
+              href="https://www.facebook.com/majedulislam.nayem"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter"
+              aria-label="Facebook"
               className="hover:text-yellow-300 transition-colors duration-300"
             >
-              <FaTwitter />
+              <FaFacebook />
             </a>
           </div>
         </div>
