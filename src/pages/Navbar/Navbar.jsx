@@ -110,7 +110,7 @@ const Navbar = () => {
     <div
   className={`
     navbar sticky top-0 z-50 w-full px-4 backdrop-blur-md shadow-md flex items-center justify-between
-    ${theme === 'dark' ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white' : 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white'}
+    ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600 text-white' : ' bg-blue-500 hover:bg-blue-600 text-white'}
   `}
 >
       {/* Left: Logo + Mobile Menu */}

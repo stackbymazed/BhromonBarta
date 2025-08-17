@@ -7,6 +7,7 @@ import image1 from '../../assets/Saint.jpg';
 import image2 from '../../assets/cox.jpg';
 import image3 from '../../assets/Sajek_Valley.jpg';
 import image4 from '../../assets/melah.jpg';
+import { Link } from "react-router";
 
 const Banner = () => {
   const sliderRef = useRef(null);
@@ -80,9 +81,9 @@ const Banner = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-primary text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition"
+                  className="bg-primary text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition "
                 >
-                  Get Started
+                  <Link to="/trips">Get Started</Link>
                 </motion.button>
               </motion.div>
             </div>

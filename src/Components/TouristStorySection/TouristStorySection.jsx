@@ -84,7 +84,7 @@ const TouristStorySection = () => {
                   <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white transition-colors">
                     {story.title}
                   </h3>
-                  <span className={`inline-block px-4 py-1 text-sm font-medium rounded-full mb-6 ${authorBg} text-gray-800 dark:text-white shadow-sm`}>
+                  <span className={`inline-block px-4 py-1 text-sm font-medium rounded-full mb-6 ${authorBg} text-gray-800 dark:text-black shadow-sm`}>
                     👤 {story.author}
                   </span>
                 </header>
