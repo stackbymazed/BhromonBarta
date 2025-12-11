@@ -68,7 +68,7 @@ const MyBooking = () => {
             <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6">My Bookings</h2>
 
             <div className="overflow-x-auto">
-                <table className="min-w-[600px] w-full bg-white shadow-md rounded border text-sm sm:text-base">
+                <table className="min-w-[600px] w-full bg-white dark:text-black shadow-md rounded border text-sm sm:text-base">
                     <thead className="bg-gray-100">
                         <tr className="text-left">
                             <th className="py-2 px-3 sm:py-3 sm:px-4">Package</th>

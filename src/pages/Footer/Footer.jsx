@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
-import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 import Logo from '../../Utilis/Logo/Logo';
 
 const Footer = () => {
@@ -14,12 +14,11 @@ const Footer = () => {
   return (
     <>
       {/* Top section above footer */}
-      <section className=" bg-blue-500 text-white px-4 py-6">
+      <section className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo and brand */}
           <div className="flex items-center space-x-3">
             <Logo className="w-10 h-10" />
-            <h2 className="text-2xl font-bold tracking-wide">YourBrand</h2>
           </div>
 
           {/* Short tagline or info */}
@@ -34,7 +33,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="hover:text-yellow-300 transition-colors duration-300"
+              className="hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors duration-300"
             >
               <FaGithub />
             </a>
@@ -43,7 +42,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="hover:text-yellow-300 transition-colors duration-300"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
             >
               <FaLinkedin />
             </a>
@@ -52,16 +51,17 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="hover:text-yellow-300 transition-colors duration-300"
+              className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
             >
               <FaFacebook />
             </a>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto flex flex-col items-center space-y-6">
-          <hr className="w-full border-yellow-400/40 mt-2" />
-          {/* Copyright */}
-          <p className="text-center text-xs text-yellow-300/90">
+
+        {/* Divider & Copyright */}
+        <div className="max-w-6xl mx-auto flex flex-col items-center space-y-6 mt-6">
+          <hr className="w-full border-gray-300 dark:border-gray-700" />
+          <p className="text-center text-xs">
             © {new Date().getFullYear()} YourBrand. All rights reserved.
           </p>
         </div>

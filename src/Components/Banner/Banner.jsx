@@ -2,12 +2,12 @@ import Slider from "react-slick";
 import { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 import image1 from '../../assets/Saint.jpg';
 import image2 from '../../assets/cox.jpg';
 import image3 from '../../assets/Sajek_Valley.jpg';
 import image4 from '../../assets/melah.jpg';
-import { Link } from "react-router";
 
 const Banner = () => {
   const sliderRef = useRef(null);
@@ -15,78 +15,85 @@ const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 700,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
     arrows: false,
+    fade: true, // smooth fade between slides
   };
 
   const handleNext = () => sliderRef.current.slickNext();
   const handlePrev = () => sliderRef.current.slickPrev();
 
+  const banners = [image1, image2, image3, image4];
+
   return (
-    <div className="relative">
+    <div className="relative w-full overflow-hidden">
       {/* Custom Navigation Arrows */}
       <button
         onClick={handlePrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-2 rounded-full shadow-md"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-3 rounded-full shadow-lg transition"
       >
         <FaArrowLeft size={20} />
       </button>
-
       <button
         onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-2 rounded-full shadow-md"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-3 rounded-full shadow-lg transition"
       >
         <FaArrowRight size={20} />
       </button>
 
       <Slider ref={sliderRef} {...settings}>
-        {[image1, image2, image3, image4].map((bg, i) => (
-          <div key={i}>
+        {banners.map((bg, i) => (
+          <div key={i} className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh]">
+            {/* Background Image */}
             <div
-              className="w-full lg:h-[90vh] h-[50vh] bg-cover bg-center flex items-center justify-center text-center relative"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${bg})` }}
+            ></div>
+
+            {/* Subtle Overlay */}
+            <div className="absolute inset-0 bg-black/25"></div> {/* Blur reduced to 25% */}
+
+            {/* Motion Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 md:px-8"
             >
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/50"></div>
-
-              {/* Motion Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="relative z-10 px-4 md:px-8 max-w-3xl text-white"
+                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-snug"
               >
-                <motion.h1
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-4xl md:text-6xl font-bold mb-4"
-                >
-                  Discover the Beauty of Nature
-                </motion.h1>
+                Discover the Beauty of Nature
+              </motion.h1>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                  className="text-lg md:text-xl mb-6"
-                >
-                  Explore amazing places in Bangladesh with us
-                </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+                className="text-md sm:text-lg md:text-xl text-white mb-6 leading-relaxed"
+              >
+                Explore amazing places in Bangladesh with us
+              </motion.p>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-primary text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition "
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  to="/trips"
+                  className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 font-medium shadow-lg transition"
                 >
-                  <Link to="/trips">Get Started</Link>
-                </motion.button>
+                  Get Started
+                </Link>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         ))}
       </Slider>

@@ -63,7 +63,7 @@ const Features = () => {
     <section className="dark:text-white py-16 px-4 md:px-16">
       {/* Header */}
       <div className="text-center mb-12">
-        <p className="text-red-500 font-semibold text-lg">Features</p>
+        {/* <p className="text-red-500 font-semibold text-lg">Features</p> */}
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Why Choose Us</h2>
       </div>
 

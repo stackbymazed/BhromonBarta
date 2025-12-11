@@ -19,11 +19,8 @@ const Navbar = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (systemPrefersDark) {
-      setTheme('dark');
-    }
+    if (savedTheme) setTheme(savedTheme);
+    else if (systemPrefersDark) setTheme('dark');
   }, []);
 
   useEffect(() => {
@@ -32,32 +29,15 @@ const Navbar = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
-  // Close dropdown when clicking outside
+  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current && 
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Close mobile menu on navigation or outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        isMobileMenuOpen && 
-        !event.target.closest('.mobile-menu-container') && 
-        !event.target.closest('.mobile-menu-button')
-      ) {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container') && !event.target.closest('.mobile-menu-button')) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -67,53 +47,27 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     userSignOut()
-      .then(() => {
-        toast.success("Successfully signed out!");
-        navigate('signIn');
-      })
-      .catch(() => {
-        toast.error("Something went wrong");
-      });
+      .then(() => { toast.success("Successfully signed out!"); navigate('/signIn'); })
+      .catch(() => { toast.error("Something went wrong"); });
   };
 
-  const links = (
-    <>
-      <li>
-        <NavLink to="/" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-white dark:text-gray-200'}>
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/community" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-white dark:text-gray-200'}>
-          Community
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-white dark:text-gray-200'}>
-          About Us
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/trips" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-white dark:text-gray-200'}>
-          Trips
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/guides-profile" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-white dark:text-gray-200'}>
-          Guide Profile
-        </NavLink>
-      </li>
-    </>
-  );
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/community', label: 'Community' },
+    { to: '/about', label: 'About Us' },
+    { to: '/trips', label: 'Trips' },
+    { to: '/guides-profile', label: 'Guide Profile' },
+  ];
+
+  const linkClass = ({ isActive }) => isActive
+    ? 'text-blue-600 dark:text-blue-400 font-semibold'
+    : 'text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-300 transition-colors';
 
   return (
-    <div
-  className={`
-    navbar sticky  top-0 z-50 w-full lg:px-20 md:px-12 px-6 backdrop-blur-md shadow-md flex items-center justify-between
-    ${theme === 'dark' ? 'bg-blue-500  text-white' : ' bg-blue-500 text-white'}
-  `}
->
-      {/* Left: Logo + Mobile Menu */}
+    <div className={`navbar sticky top-0 z-50 w-full backdrop-blur-md shadow-md px-6 md:px-12 lg:px-20 flex items-center justify-between
+      ${theme === 'dark' ? 'dark:bg-neutral-900 dark:text-gray-200' : 'bg-white text-black'}`}
+    >
+      {/* Logo + Mobile Menu */}
       <div className="navbar-start flex items-center gap-2">
         {/* Mobile Hamburger */}
         <div className="lg:hidden">
@@ -124,8 +78,7 @@ const Navbar = () => {
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
               viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M4 6h16M4 12h8m-8 6h16" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </button>
           <AnimatePresence>
@@ -136,17 +89,17 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="mobile-menu-container absolute top-full left-0 mt-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-md shadow-lg w-52 p-3 z-40"
+                className="mobile-menu-container absolute top-full left-0 mt-2 bg-white dark:bg-gray-800 rounded-md shadow-lg w-52 p-3 z-40 flex flex-col gap-2"
               >
-                {React.Children.map(links.props.children, (child, idx) => (
+                {links.map((link, idx) => (
                   <motion.li
                     key={idx}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="py-2 border-b border-white last:border-none"
+                    className="py-2 border-b border-gray-200 dark:border-gray-700 last:border-none"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {child}
+                    <NavLink to={link.to} className={linkClass}>{link.label}</NavLink>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -155,22 +108,15 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div className="hidden md:block lg:block">
-          <Logo />
-        </div>
+        <div className="hidden md:block lg:block"><Logo /></div>
       </div>
 
-      {/* Center: Desktop Nav */}
+      {/* Desktop Links */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">
-          {React.Children.map(links.props.children, (child, idx) => (
-            <motion.li
-              key={idx}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cursor-pointer"
-            >
-              {child}
+        <ul className="menu menu-horizontal px-1 flex items-center gap-6">
+          {links.map((link, idx) => (
+            <motion.li key={idx} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="cursor-pointer">
+              <NavLink to={link.to} className={linkClass}>{link.label}</NavLink>
             </motion.li>
           ))}
         </ul>
@@ -186,27 +132,9 @@ const Navbar = () => {
         >
           <AnimatePresence exitBeforeEnter>
             {theme === 'dark' ? (
-              <motion.span
-                key="sun"
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                exit={{ opacity: 0, rotate: 90 }}
-                transition={{ duration: 0.3 }}
-                className="text-yellow-300 text-xl"
-              >
-                <FiSunrise />
-              </motion.span>
+              <motion.span key="sun" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.3 }} className="text-yellow-300 text-xl"><FiSunrise /></motion.span>
             ) : (
-              <motion.span
-                key="moon"
-                initial={{ opacity: 0, rotate: 90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                exit={{ opacity: 0, rotate: -90 }}
-                transition={{ duration: 0.3 }}
-                className="text-gray-700 text-xl"
-              >
-                <FiMoon />
-              </motion.span>
+              <motion.span key="moon" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.3 }} className="text-gray-700 text-xl"><FiMoon /></motion.span>
             )}
           </AnimatePresence>
         </button>
@@ -214,15 +142,8 @@ const Navbar = () => {
         {/* Auth/Profile */}
         {user ? (
           <div className="relative" ref={dropdownRef}>
-            <div
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="cursor-pointer"
-            >
-              <img
-                className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600"
-                src={user?.photoURL}
-                alt="User"
-              />
+            <div onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="cursor-pointer w-10 h-10">
+              <img className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600" src={user?.photoURL} alt="User" />
             </div>
 
             <AnimatePresence>
@@ -234,33 +155,13 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                   className="absolute top-full right-2 sm:right-4 mt-3 max-w-[200px] rounded-xl z-30 bg-white dark:bg-gray-800 text-black dark:text-white shadow-xl p-4 space-y-2"
                 >
-
-                  <li className="text-base font-semibold break-words ">
-                    {user?.displayName}
-                  </li>
-                  <li className="text-base font-semibold break-words">
-                    {user?.email}
-                  </li>
-                  <motion.li
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border-2 rounded-sm px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary font-semibold' : 'text-gray-700 dark:text-white'}>
-                      Dashboard
-                    </NavLink>
+                  <li className="text-base font-semibold break-words">{user?.displayName}</li>
+                  <li className="text-base font-semibold break-words">{user?.email}</li>
+                  <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="border-2 rounded-sm px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-blue-600 dark:text-blue-400 font-semibold' : 'text-gray-700 dark:text-white'}>Dashboard</NavLink>
                   </motion.li>
-                  <motion.li
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border-2 rounded-sm"
-                  >
-                    <button
-                      onClick={handleSignOut}
-                      className="w-full btn btn-outline btn-sm dark:border-white dark:text-white"
-                    >
-                      Sign Out
-                    </button>
+                  <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="border-2 rounded-sm">
+                    <button onClick={handleSignOut} className="w-full btn btn-outline btn-sm dark:border-white dark:text-white">Sign Out</button>
                   </motion.li>
                 </motion.ul>
               )}
@@ -269,22 +170,10 @@ const Navbar = () => {
         ) : (
           <>
             <NavLink to='/signIn'>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-outline btn-sm"
-              >
-                Sign In
-              </motion.button>
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn btn-outline btn-sm">Sign In</motion.button>
             </NavLink>
             <NavLink to='/signUp'>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-primary btn-sm"
-              >
-                Sign Up
-              </motion.button>
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn btn-primary btn-sm">Sign Up</motion.button>
             </NavLink>
           </>
         )}
@@ -294,6 +183,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-

@@ -15,7 +15,7 @@ const AllStories = () => {
     },
   });
 
-  if (isLoading) return <div className="text-center mt-10">Loading all stories...</div>;
+  if (isLoading) return <div className="text-center mt-10"><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div></div>;
   if (error) return <div className="text-center mt-10 text-red-500">Error loading stories.</div>;
 
   return (

@@ -44,7 +44,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white dark:text-black shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">
         Welcome, {user?.displayName || "User"}!
       </h2>

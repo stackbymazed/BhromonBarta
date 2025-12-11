@@ -68,7 +68,7 @@ const AddStory = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-8 bg-white rounded shadow mt-10">
+        <div className="max-w-3xl mx-auto p-8 bg-white dark:text-black rounded shadow mt-10">
             <h2 className="text-3xl font-bold mb-6 text-center">Add Your Travel Story</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
@@ -78,7 +78,7 @@ const AddStory = () => {
                     <input
                         type="text"
                         {...register("title", { required: "Title is required" })}
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full dark:text-white"
                         placeholder="Story title"
                     />
                     {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
@@ -89,7 +89,7 @@ const AddStory = () => {
                     <label className="block font-medium mb-1">Description</label>
                     <textarea
                         {...register("description", { required: "Description is required" })}
-                        className="textarea textarea-bordered w-full h-40"
+                        className="textarea textarea-bordered w-full h-40 dark:text-white"
                         placeholder="Share your journey..."
                     ></textarea>
                     {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
@@ -103,7 +103,7 @@ const AddStory = () => {
                         multiple
                         accept="image/*"
                         {...register("images", { required: "At least one image is required" })}
-                        className="file-input file-input-bordered w-full"
+                        className="file-input file-input-bordered w-full dark:text-white"
                     />
                     {errors.images && <p className="text-red-500 text-sm">{errors.images.message}</p>}
                 </div>

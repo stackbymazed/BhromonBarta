@@ -48,18 +48,18 @@ const JoinGuide = () => {
 
 
     return (
-        <div className="max-w-md mx-auto p-6 border rounded shadow mt-10 bg-white">
+        <div className="max-w-md mx-auto p-6 border rounded shadow mt-10 bg-white dark:text-black">
             <h2 className="text-2xl font-bold mb-4 text-center">Join as Tour Guide</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
 
                 {/* Application Title */}
                 <div>
-                    <label className="block font-semibold mb-1">Application Title</label>
+                    <label className="block font-semibold mb-1 ">Application Title</label>
                     <input
                         type="text"
                         {...register("title", { required: "Title is required" })}
-                        className="w-full border px-3 py-2 rounded"
+                        className="w-full border px-3 py-2 rounded dark:text-black"
                         placeholder="Enter application title"
                     />
                     {errors.title && (
@@ -79,7 +79,7 @@ const JoinGuide = () => {
                             },
                         })}
                         rows={4}
-                        className="w-full border px-3 py-2 rounded"
+                        className="w-full border px-3 py-2 rounded dark:text-black"
                         placeholder="Explain your motivation"
                     ></textarea>
                     {errors.reason && (

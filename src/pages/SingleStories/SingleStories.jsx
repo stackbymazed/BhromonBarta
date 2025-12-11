@@ -16,7 +16,7 @@ const SingleStories = () => {
         enabled: !!id,
     });
 
-    if (isLoading) return <div className="text-center mt-10">Loading story...</div>;
+    if (isLoading) return <div className="flex justify-center items-center text-center"><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div></div>;
     if (error) return <div className="text-center mt-10 text-red-500">Error loading story.</div>;
     if (!story) return <div className="text-center mt-10">Story not found.</div>;
 

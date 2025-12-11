@@ -97,7 +97,7 @@ const TouristStorySection = () => {
                   <FacebookShareButton
                     url={`${window.location.origin}/stories/${story._id}`}
                     quote={story.title}
-                    className="inline-flex items-center space-x-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-5 py-3 rounded-full hover:from-teal-600 hover:to-emerald-600 transition-all duration-300 shadow-md"
+                    className="inline-flex items-center space-x-3 bg-blue-700 text-white hover:bg-blue-600 px-5 py-1 rounded-full transition-all duration-300 shadow-md"
                   >
                     <FacebookIcon size={32} round />
                     <span className="font-semibold">Share on Facebook</span>
@@ -105,7 +105,7 @@ const TouristStorySection = () => {
                 ) : (
                   <button
                     onClick={() => navigate('/signIn')}
-                    className="inline-flex items-center space-x-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-5 py-3 rounded-full hover:from-teal-600 hover:to-emerald-600 transition-all duration-300 shadow-md"
+                    className="inline-flex items-center space-x-3 bg-blue-700 hover:bg-blue-600 text-white px-5 py-1 rounded-full transition-all duration-300 shadow-md"
                   >
                     <FacebookIcon size={32} round />
                     <span className="font-semibold">Login to Share</span>
@@ -127,7 +127,7 @@ const TouristStorySection = () => {
       >
         <button
           onClick={() => navigate('/allStories')}
-          className="text-white bg-gradient-to-r from-gray-800 to-gray-900 px-8 py-3 rounded-full font-medium hover:from-gray-900 hover:to-black transition-all duration-300 shadow-md"
+          className="text-white bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-medium hover:from-gray-900 hover:to-black transition-all duration-300 shadow-md"
         >
           View All Stories
         </button>

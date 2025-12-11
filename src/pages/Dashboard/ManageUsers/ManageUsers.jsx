@@ -174,11 +174,11 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Manage Users</h2>
+    <div className="p-6 dark:text-white">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Manage Users</h2>
 
       {/* Filters and Per Page */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6 items-center">
+      <div className="flex flex-col md:flex-row gap-4 mb-6 items-center dark:text-white">
         <input
           type="text"
           placeholder="Search by name or email"
@@ -208,8 +208,8 @@ const ManageUsers = () => {
 
       {/* Table */}
       <div className="overflow-x-auto rounded shadow-sm">
-        <table className="min-w-full table-auto text-sm text-left text-gray-700">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+        <table className="min-w-full table-auto text-sm text-left text-gray-700 ">
+          <thead className="bg-gray-100 text-gray-600 dark:text-black uppercase text-xs">
             <tr>
               <th className="p-3">#</th>
               <th className="p-3">Name</th>
@@ -222,7 +222,7 @@ const ManageUsers = () => {
           </thead>
           <tbody>
             {paginatedUsers.map((user, idx) => (
-              <tr key={user._id} className="border-b hover:bg-gray-50">
+              <tr key={user._id} className="border-b hover:bg-gray-50 dark:text-white">
                 <td className="p-3">{(currentPage - 1) * usersPerPage.value + idx + 1}</td>
                 <td className="p-3 font-medium">{user.name}</td>
                 <td className="p-3">{user.email}</td>
@@ -265,7 +265,7 @@ const ManageUsers = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50 dark:text-black"
           >
             Prev
           </button>
@@ -275,7 +275,7 @@ const ManageUsers = () => {
               key={i}
               onClick={() => handlePageChange(i + 1)}
               className={`px-3 py-1 rounded ${
-                currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-100'
+                currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:text-black'
               }`}
             >
               {i + 1}
@@ -285,7 +285,7 @@ const ManageUsers = () => {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50 dark:text-black"
           >
             Next
           </button>

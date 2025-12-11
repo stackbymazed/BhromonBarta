@@ -26,6 +26,8 @@ import Trips from "../pages/Trips/Trips";
 import PrivateRoute from "../Utilis/PrivateRoute/PrivateRoute";
 import DashboardWel from "../pages/Dashboard/DashboardWel/DashboardWel";
 import GuidesProfile from "../pages/GuidesProfile/GuidesProfile";
+import MyActivity from "../pages/Dashboard/MyActivity/MyActivity";
+import GuideActivityGuide from "../pages/Dashboard/MyActivityGuide/MyActivityGuide";
 
 
 const router = createBrowserRouter([
@@ -92,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile
+      },
+      {
+        path: 'myActivity',
+        Component: MyActivity
+      },
+      {
+        path: 'myActivityGuide',
+        Component: GuideActivityGuide
       },
       {
         path: 'bookings',

@@ -115,6 +115,9 @@ const DashBoardLayout = () => {
                                     <NavLink to="profile" className={linkStyle}>
                                         <FaUser /> Manage Profile
                                     </NavLink>
+                                    <NavLink to="myActivity" className={linkStyle}>
+                                        <FaUser /> My Activity
+                                    </NavLink>
                                     <NavLink to="bookings" className={linkStyle}>
                                         <FaBook /> My Bookings
                                     </NavLink>
@@ -138,7 +141,9 @@ const DashBoardLayout = () => {
                                     <NavLink to="/dashboard/profileGuide" className={linkStyle}>
                                         <FaUser /> Manage Profile
                                     </NavLink>
-
+                                    <NavLink to="myActivityGuide" className={linkStyle}>
+                                        <FaUser /> My Activity
+                                    </NavLink>
                                     <NavLink to="/dashboard/assigned-tours" className={linkStyle}>
                                         <FaSuitcase /> My Assigned Tours
                                     </NavLink>

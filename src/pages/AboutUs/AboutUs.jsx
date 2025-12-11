@@ -33,9 +33,6 @@ const AboutUS = () => {
     <motion.div
       className={`
           min-h-screen 
-          bg-gradient-to-r 
-          from-pink-100 via-yellow-100 to-green-100 
-          dark:from-purple-900 dark:via-blue-900 dark:to-black 
           bg-[length:200%_200%] 
           animate-bg
           dark:text-white
@@ -45,30 +42,56 @@ const AboutUS = () => {
       animate="animate"
       style={{ minHeight: '100vh' }}
     >
-      <div className="max-w-6xl mx-auto px-4 py-10 ">
+      <div className="max-w-6xl mx-auto px-4 ">
         {/* Developer Info */}
         <div className="">
           <h2 className="text-3xl font-bold text-center mb-10">Meet the Developer</h2>
 
-          {/* Profile Card */}
-          <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 text-center">
-            <img
-              src="https://i.ibb.co/998jGgWD/Air-Brush-20240201194436-2.jpg"
-              alt="Majedul Islam"
-              className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
-            />
-            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
-              Majedul Islam
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">
-              Full-Stack Web Developer
-            </p>
-            <p className="text-sm mt-3 text-gray-500 dark:text-gray-400">
-              I build responsive and dynamic web applications using the MERN stack,
-              Firebase, and modern UI libraries. Passionate about solving real-world
-              problems through code.
-            </p>
+          {/* Profile Cards Wrapper */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* Card 1 */}
+            <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 text-center">
+              <img
+                src="https://i.ibb.co.com/rRqJFHkR/Whats-App-Image-2025-12-11-at-08-59-16-f3dec7a8.jpg"
+                alt="Majedul Islam"
+                className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
+              />
+              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                Hossain Ahmed
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-2">
+                Web Developer
+              </p>
+              <p className="text-sm mt-3 text-gray-500 dark:text-gray-400">
+                I build responsive and dynamic web applications using the MERN stack,
+                Firebase, and modern UI libraries. Passionate about solving real-world
+                problems through code.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 text-center">
+              <img
+                src="https://i.ibb.co.com/HL7YWGyP/Whats-App-Image-2025-12-11-at-09-00-22-1230ed5d.jpg"
+                alt="Sajid Mohtadi"
+                className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
+              />
+              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                Sajid Mohtadi
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-2">
+                Web Developer
+              </p>
+              <p className="text-sm mt-3 text-gray-500 dark:text-gray-400">
+                I build responsive and dynamic web applications using the MERN stack,
+                Firebase, and modern UI libraries. Passionate about solving real-world
+                problems through code.
+              </p>
+            </div>
           </div>
+
+
 
           {/* Project Cards */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">

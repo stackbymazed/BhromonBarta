@@ -24,13 +24,7 @@ const bgVariants = {
 const Home = () => {
   return (
     <motion.div
-      className={`
-        min-h-screen 
-        bg-gradient-to-r 
-        from-pink-100 via-yellow-100 to-green-100 
-        dark:from-purple-900 dark:via-blue-900 dark:to-black 
-        bg-[length:200%_200%]
-      `}
+      className={`min-h-screen bg-white dark:bg-gradient-to-b dark:from-neutral-900 dark:to-neutral-950 dark:text-gray-200 bg-[length:200%_200%]`}
       variants={bgVariants}
       animate="animate"
     >
