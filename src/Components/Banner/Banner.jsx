@@ -4,10 +4,13 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
-import image1 from '../../assets/Saint.jpg';
-import image2 from '../../assets/cox.jpg';
-import image3 from '../../assets/Sajek_Valley.jpg';
-import image4 from '../../assets/melah.jpg';
+const banners = [
+  "/images/hero/saint.webp",
+  "/images/hero/cox.webp",
+  "/images/hero/sajek.webp",
+  "/images/hero/melah.webp",
+];
+
 
 const Banner = () => {
   const sliderRef = useRef(null);
@@ -27,8 +30,6 @@ const Banner = () => {
   const handleNext = () => sliderRef.current.slickNext();
   const handlePrev = () => sliderRef.current.slickPrev();
 
-  const banners = [image1, image2, image3, image4];
-
   return (
     <div className="relative w-full overflow-hidden">
       {/* Custom Navigation Arrows */}
@@ -47,17 +48,22 @@ const Banner = () => {
 
       <Slider ref={sliderRef} {...settings}>
         {banners.map((bg, i) => (
-          <div key={i} className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh]">
+          <div
+            key={i}
+            className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh]"
+          >
             {/* Background Image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${bg})` }}
-            ></div>
+            <img
+              src={bg}
+              alt="Travel destination"
+              className="absolute inset-0 w-full h-full object-cover"
+              fetchpriority={i === 0 ? "high" : "auto"} // first slide priority
+            />
 
-            {/* Subtle Overlay */}
-            <div className="absolute inset-0 bg-black/25"></div> {/* Blur reduced to 25% */}
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/25"></div>
 
-            {/* Motion Content */}
+            {/* Content */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -67,8 +73,8 @@ const Banner = () => {
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-snug"
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4"
               >
                 Discover the Beauty of Nature
               </motion.h1>
@@ -76,27 +82,23 @@ const Banner = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-                className="text-md sm:text-lg md:text-xl text-white mb-6 leading-relaxed"
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="text-md sm:text-lg md:text-xl text-white mb-6"
               >
                 Explore amazing places in Bangladesh with us
               </motion.p>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                to="/trips"
+                className="bg-primary text-white px-6 py-3 rounded-full shadow-lg"
               >
-                <Link
-                  to="/trips"
-                  className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 font-medium shadow-lg transition"
-                >
-                  Get Started
-                </Link>
-              </motion.div>
+                Get Started
+              </Link>
             </motion.div>
           </div>
         ))}
       </Slider>
+
     </div>
   );
 };

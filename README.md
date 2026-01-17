@@ -16,11 +16,14 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 
 ## 🧭 Project Summary
 
-**Bhromon Barta** is a full-featured tourism platform that connects tourists, tour guides, and admins under one system. It offers booking, storytelling, guide profiles, and a management dashboard — all with secure authentication, real-time data updates, and beautiful UI.
+**BhromonBarta** is a full-featured tourism platform that connects tourists, tour guides, and admins under one system. It offers booking, storytelling, guide profiles, and a management dashboard — all with secure authentication, real-time data updates, and beautiful UI.
+
+
 
 ---
 
 ## ✨ Key Highlights
+
 
 - 🔐 **JWT-based Authentication** (Email/Password & Google Login)
 - 👥 **Three User Roles**: Tourist, Tour Guide & Admin
@@ -31,7 +34,7 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 - 📸 **Stories**: Add, edit, delete & share via Facebook
 - 💼 **Tour Guide Application** system
 - 🧾 **Stripe Payment Integration**
-- 🔔 **SweetAlert2/Toastify** notifications (no browser alerts!)
+- 🔔 **SweetAlert2/Toastify** notifications (no browser alerts! )
 - 🚀 **Framer Motion** animations
 - 📡 **TanStack Query** for data fetching (GET only)
 - 🔍 **Search & Filter** features using MongoDB operators
@@ -110,8 +113,8 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 
 ## 👨‍💻 Developer Info
 
-- **👤 Name:** Mazjedul Islam Nayem  
+- **👤 Name:** Mazjedul Islam  
 - **📧 Email:** majedulislam223311@gmail.com  
-- **🌐 Portfolio:** [yourportfolio.com](https://mazed-portfolio.netlify.app/)  
+- **🌐 Portfolio:** [yourportfolio.com](https://mazed-portfolio.netlify.app)  
 
 
