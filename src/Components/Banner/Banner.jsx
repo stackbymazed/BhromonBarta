@@ -5,9 +5,15 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 
 const banners = [
-  "/images/hero/saint.webp",
+  
+  "/images/hero/melah.webp",
   "/images/hero/cox.webp",
-  "/images/hero/sajek.webp",
+  "/images/hero/melah.webp",
+  "/images/hero/cox.webp",
+  "/images/hero/melah.webp",
+  "/images/hero/cox.webp",
+  "/images/hero/melah.webp",
+  "/images/hero/cox.webp",
   "/images/hero/melah.webp",
 ];
 
