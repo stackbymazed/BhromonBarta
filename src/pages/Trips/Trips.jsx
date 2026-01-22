@@ -82,32 +82,77 @@ const Trips = () => {
           {sortedTours.map((tour) => (
             <div
               key={tour._id}
-              className="bg-white dark:bg-gray-900 shadow-lg rounded-xl overflow-hidden flex flex-col hover:shadow-xl transition"
+              className="
+    group bg-white dark:bg-gray-900
+    rounded-2xl overflow-hidden
+    shadow-md hover:shadow-2xl
+    transition-all duration-300
+    flex flex-col
+  "
             >
-              <img
-                src={tour.gallery?.[0]}
-                alt={tour.title}
-                className="h-48 w-full object-cover"
-              />
-              <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">{tour.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 flex-1 line-clamp-3">{tour.about}</p>
-                <div className="mt-4">
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    <strong>Price:</strong> ৳{tour.price}
-                  </p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    <strong>Duration:</strong> {tour.duration} Days
-                  </p>
+              {/* IMAGE */}
+              <div className="relative overflow-hidden">
+                <img
+                  src={tour.gallery?.[0]}
+                  alt={tour.title}
+                  className="
+        h-52 w-full object-cover
+        group-hover:scale-105 transition-transform duration-500
+      "
+                />
+
+                {/* PRICE BADGE */}
+                <div
+                  className="
+        absolute top-4 right-4
+        bg-blue-600 text-white
+        px-3 py-1 rounded-full
+        text-sm font-semibold shadow
+      "
+                >
+                  ৳{tour.price}
                 </div>
+              </div>
+
+              {/* CONTENT */}
+              <div className="p-5 flex-1 flex flex-col">
+                {/* TITLE */}
+                <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800 dark:text-white line-clamp-1">
+                  {tour.title}
+                </h3>
+
+                {/* DESCRIPTION */}
+                <p className="text-sm text-gray-600 dark:text-gray-300 flex-1 line-clamp-3">
+                  {tour.about}
+                </p>
+
+                {/* META INFO */}
+                <div className="mt-4 flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
+                  <span className="flex items-center gap-1">
+                    ⏱ <span>{tour.duration} Days</span>
+                  </span>
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                    Best Deal
+                  </span>
+                </div>
+
+                {/* CTA */}
                 <button
                   onClick={() => navigate(`/packages/${tour._id}`)}
-                  className="mt-5 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition"
+                  className="
+        mt-5 w-full
+        bg-gradient-to-r from-blue-500 to-blue-600
+        hover:from-blue-600 hover:to-blue-700
+        text-white py-2.5 rounded-lg
+        font-semibold tracking-wide
+        transition
+      "
                 >
                   View Details
                 </button>
               </div>
             </div>
+
           ))}
         </div>
       </div>

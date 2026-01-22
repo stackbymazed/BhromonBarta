@@ -58,35 +58,77 @@ const TravelGuide = () => {
 
                 {/* Packages */}
                 <TabPanel>
-                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {packages.map((pkg, index) => (
-                            <motion.div
-                                key={pkg._id}
-                                className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden flex flex-col h-full"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                viewport={{ once: true }}
+                    <div
+                        key={packages._id}
+                        className="
+    group bg-white dark:bg-gray-900
+    rounded-2xl overflow-hidden
+    shadow-md hover:shadow-2xl
+    transition-all duration-300
+    flex flex-col
+  "
+                    >
+                        {/* IMAGE */}
+                        <div className="relative overflow-hidden">
+                            <img
+                                src={packages.gallery?.[0]}
+                                alt={packages.title}
+                                className="
+        h-52 w-full object-cover
+        group-hover:scale-105 transition-transform duration-500
+      "
+                            />
+
+                            {/* PRICE BADGE */}
+                            <div
+                                className="
+        absolute top-4 right-4
+        bg-blue-600 text-white
+        px-3 py-1 rounded-full
+        text-sm font-semibold shadow
+      "
                             >
-                                <img
-                                    src={pkg?.gallery?.[0] || "https://via.placeholder.com/400x300?text=No+Image"}
-                                    alt={pkg.title}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-5 flex flex-col flex-1">
-                                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">{pkg.title}</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Type: {pkg.status}</p>
-                                    <p className="text-green-600 dark:text-green-400 font-medium mb-4">৳ {pkg.price}</p>
-                                    <div className="flex-grow" />
-                                    <button
-                                        className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-all duration-300"
-                                        onClick={() => navigate(`/packages/${pkg._id}`)}
-                                    >
-                                        View Package
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
+                                ৳{packages.price}
+                            </div>
+                        </div>
+
+                        {/* CONTENT */}
+                        <div className="p-5 flex-1 flex flex-col">
+                            {/* TITLE */}
+                            <h3 className="text-lg md:text-xl font-bold mb-2 text-gray-800 dark:text-white line-clamp-1">
+                                {packages.title}
+                            </h3>
+
+                            {/* DESCRIPTION */}
+                            <p className="text-sm text-gray-600 dark:text-gray-300 flex-1 line-clamp-3">
+                                {packages.about}
+                            </p>
+
+                            {/* META INFO */}
+                            <div className="mt-4 flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
+                                <span className="flex items-center gap-1">
+                                    ⏱ <span>{packages.duration} Days</span>
+                                </span>
+                                <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                                    Best Deal
+                                </span>
+                            </div>
+
+                            {/* CTA */}
+                            <button
+                                onClick={() => navigate(`/packages/${packages._id}`)}
+                                className="
+        mt-5 w-full
+        bg-gradient-to-r from-blue-500 to-blue-600
+        hover:from-blue-600 hover:to-blue-700
+        text-white py-2.5 rounded-lg
+        font-semibold tracking-wide
+        transition
+      "
+                            >
+                                View Details
+                            </button>
+                        </div>
                     </div>
                 </TabPanel>
 

@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../pages/Navbar/Navbar';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import Footer from '../../pages/Footer/Footer';
 
 const RootLayout = () => {
+  const location = useLocation();
+
+  // 👉 শুধু Home page এ hero mode
+  const isHome = location.pathname === "/";
+
   return (
     <div>
-      <Navbar></Navbar>
-      <div className='min-h-96 max-w-[1400px] mx-auto'>
-        <Outlet></Outlet>
+      <Navbar isHero={isHome} />
+      <div className="min-h-96">
+        <Outlet />
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Logo from '../../Utilis/Logo/Logo';
 import { toast } from 'react-toastify';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = ({ isHero = false }) => {
   const { user, userSignOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -14,6 +14,14 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef();
+
+  const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const onScroll = () => setScrolled(window.scrollY > 80);
+  window.addEventListener("scroll", onScroll);
+  return () => window.removeEventListener("scroll", onScroll);
+}, []);
 
   // Theme logic
   useEffect(() => {
@@ -59,14 +67,29 @@ const Navbar = () => {
     { to: '/guides-profile', label: 'Guide Profile' },
   ];
 
-  const linkClass = ({ isActive }) => isActive
-    ? 'text-blue-600 dark:text-blue-400 font-semibold'
-    : 'text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-300 transition-colors';
+const linkClass = ({ isActive }) =>
+  isActive
+    ? "text-blue-500 font-semibold"
+    : isHero && !scrolled
+    ? "text-white hover:text-blue-300"
+    : "text-gray-800 dark:text-gray-200 hover:text-blue-500";
 
   return (
-    <div className={`navbar sticky top-0 z-50 w-full backdrop-blur-md shadow-md px-6 md:px-12 lg:px-20 flex items-center justify-between
-      ${theme === 'dark' ? 'dark:bg-neutral-900 dark:text-gray-200' : 'bg-white text-black'}`}
-    >
+    <div
+  className={`
+    w-full z-50 px-6 md:px-12 lg:px-20
+    flex items-center justify-between
+    transition-all duration-500
+    ${
+      isHero
+        ? scrolled
+          ? "fixed top-0 bg-white/90 dark:bg-neutral-900/90 backdrop-blur shadow-md"
+          : "absolute top-0 bg-transparent text-white"
+        : "sticky top-0 bg-white dark:bg-neutral-900 shadow-md"
+    }
+  `}
+>
+
       {/* Logo + Mobile Menu */}
       <div className="navbar-start flex items-center gap-2">
         {/* Mobile Hamburger */}

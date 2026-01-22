@@ -1,110 +1,170 @@
 import Slider from "react-slick";
-import { useRef } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router";
 
 const banners = [
-  
-  "/images/hero/melah.webp",
-  "/images/hero/cox.webp",
-  "/images/hero/melah.webp",
-  "/images/hero/cox.webp",
-  "/images/hero/melah.webp",
-  "/images/hero/cox.webp",
-  "/images/hero/melah.webp",
-  "/images/hero/cox.webp",
-  "/images/hero/melah.webp",
+  {
+    image: "/images/hero/twopeople.webp",
+    title: "Find your perfect",
+    main: "VACATION",
+    subtitle: "Italy, Rome, Venice, Milan",
+  },
+  {
+    image: "/images/hero/canalhouse.webp",
+    title: "Open your eyes to",
+    main: "THE HIDDEN WORLD",
+    subtitle: "Bern, Lucern, Zurich, Zermatt",
+  },
+  {
+    image: "/images/hero/cox.webp",
+    title: "Special",
+    main: "7 Days in Cox's Bazar",
+    subtitle: "Bern, Lucern, Jungfrau, Matterhorn",
+  },
 ];
-
 
 const Banner = () => {
   const sliderRef = useRef(null);
+  const [active, setActive] = useState(0);
 
   const settings = {
     dots: true,
     infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    fade: true,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 6500,
+    speed: 1200,
     arrows: false,
-    fade: true, // smooth fade between slides
+    beforeChange: (_, next) => setActive(next),
   };
 
-  const handleNext = () => sliderRef.current.slickNext();
-  const handlePrev = () => sliderRef.current.slickPrev();
-
   return (
-    <div className="relative w-full overflow-hidden">
-      {/* Custom Navigation Arrows */}
+    <div className="relative w-full">
+      {/* ⬅️ LEFT ARROW */}
       <button
-        onClick={handlePrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-3 rounded-full shadow-lg transition"
+        onClick={() => sliderRef.current?.slickPrev()}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-30
+        bg-white/30 hover:bg-white/50 p-3 rounded-full transition"
       >
-        <FaArrowLeft size={20} />
+        <FaChevronLeft className="text-white" />
       </button>
+
+      {/* ➡️ RIGHT ARROW */}
       <button
-        onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/40 hover:bg-white/60 p-3 rounded-full shadow-lg transition"
+        onClick={() => sliderRef.current?.slickNext()}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-30
+        bg-white/30 hover:bg-white/50 p-3 rounded-full transition"
       >
-        <FaArrowRight size={20} />
+        <FaChevronRight className="text-white" />
       </button>
 
       <Slider ref={sliderRef} {...settings}>
-        {banners.map((bg, i) => (
+        {banners.map((item, i) => (
           <div
             key={i}
-            className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[90vh]"
+            className="relative min-h-[100svh] overflow-hidden"
           >
-            {/* Background Image */}
-            <img
-              src={bg}
-              alt="Travel destination"
+            {/* 🌈 FALLBACK GRADIENT */}
+            <div className="absolute inset-0 bg-gradient-to-r from-sky-900 via-emerald-900 to-teal-800" />
+
+            {/* 🎥 IMAGE – CENTER ZOOM OUT */}
+            <motion.img
+              src={item.image}
+              alt={item.main}
               className="absolute inset-0 w-full h-full object-cover"
-              fetchpriority={i === 0 ? "high" : "auto"} // first slide priority
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 12, ease: "linear" }}
+              style={{ transformOrigin: "50% 50%" }}
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/25"></div>
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-black/40" />
 
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 md:px-8"
+            {/* CONTENT */}
+            <div
+              className="relative z-20 min-h-[100svh] flex items-center
+              px-4 sm:px-6 md:px-12 lg:px-24 text-white"
             >
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4"
-              >
-                Discover the Beauty of Nature
-              </motion.h1>
+              <AnimatePresence mode="wait">
+                {active === i && (
+                  <div key={i} className="max-w-2xl">
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-md sm:text-lg md:text-xl text-white mb-6"
-              >
-                Explore amazing places in Bangladesh with us
-              </motion.p>
+                    {/* TITLE */}
+                    <motion.p
+                      initial={{ opacity: 0, x: -40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="
+                        uppercase tracking-widest mb-3 text-white/80
+                        text-xs sm:text-sm md:text-base lg:text-3xl
+                      "
+                    >
+                      {item.title}
+                    </motion.p>
 
-              <Link
-                to="/trips"
-                className="bg-primary text-white px-6 py-3 rounded-full shadow-lg"
-              >
-                Get Started
-              </Link>
-            </motion.div>
+                    {/* MAIN HEADING */}
+                    <motion.h1
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.9 }}
+                      className="
+                        font-extrabold mb-4
+                        text-3xl sm:text-4xl md:text-5xl
+                        lg:text-6xl xl:text-7xl
+                      "
+                    >
+                      {item.main}
+                    </motion.h1>
+
+                    {/* SUBTITLE – LETTER ANIMATION */}
+                    <motion.p
+                      className="
+                        mb-8 flex flex-wrap text-white/90
+                        text-sm sm:text-base md:text-lg lg:text-xl
+                      "
+                    >
+                      {item.subtitle.split("").map((char, idx) => (
+                        <motion.span
+                          key={idx}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: idx * 0.025 }}
+                        >
+                          {char === " " ? "\u00A0" : char}
+                        </motion.span>
+                      ))}
+                    </motion.p>
+
+                    {/* BUTTON */}
+                    <motion.div
+                      initial={{ scaleX: 0, originX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.6 }}
+                      className="inline-block"
+                    >
+                      <Link
+                        to="/trips"
+                        className="
+                          inline-block bg-blue-500 hover:bg-blue-600
+                          rounded-md font-semibold transition
+                          px-5 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3
+                          text-sm sm:text-base
+                        "
+                      >
+                        LEARN MORE
+                      </Link>
+                    </motion.div>
+
+                  </div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         ))}
       </Slider>
-
     </div>
   );
 };
