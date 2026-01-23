@@ -1,6 +1,6 @@
 # 🌍 Bhromon Barta - Tourism Management System
 
-Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68.web.app/)
+Live Site: 👉 [https://bhromonbarta-6cc68.web.app](https://bhromonbarta-6cc68.web.app)
 
 📽️ Requirement Explanation Video: *[Add your video link here]*  
 📁 Assignment: `assignment12_category_003`
@@ -36,7 +36,6 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app/](https://bhromonbarta-6cc68
 - 🧾 **Stripe Payment Integration**
 - 🔔 **SweetAlert2/Toastify** notifications (no browser alerts! )
 - 🚀 **Framer Motion** animations
-- 📡 **TanStack Query** for data fetching (GET only)
 - 🔍 **Search & Filter** features using MongoDB operators
 
 ---
