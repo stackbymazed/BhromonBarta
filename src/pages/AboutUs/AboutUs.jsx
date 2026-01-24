@@ -75,35 +75,6 @@ const AboutUS = () => {
 
           {/* Project Cards */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {/* Project 1 */}
-            {/* <div className="bg-white dark:bg-gray-900 p-5 rounded-xl shadow-md">
-              <h4 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
-                Travel Explorer
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                A travel booking platform featuring destinations, packages, and user
-                reviews.
-              </p>
-              <div className="flex justify-between text-sm">
-                <a
-                  href="https://github.com/majedul/travel-explorer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://travel-explorer.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-green-600 hover:underline"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div> */}
-
             {/* Project 2 */}
             <div className="bg-white dark:bg-gray-900 p-5 rounded-xl shadow-md">
               <h4 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
