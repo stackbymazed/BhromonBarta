@@ -58,27 +58,7 @@ const AboutUS = () => {
                 className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
               />
               <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                Hossain Ahmed
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-2">
-                Web Developer
-              </p>
-              <p className="text-sm mt-3 text-gray-500 dark:text-gray-400">
-                I build responsive and dynamic web applications using the MERN stack,
-                Firebase, and modern UI libraries. Passionate about solving real-world
-                problems through code.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 text-center">
-              <img
-                src="https://i.ibb.co.com/HL7YWGyP/Whats-App-Image-2025-12-11-at-09-00-22-1230ed5d.jpg"
-                alt="Sajid Mohtadi"
-                className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
-              />
-              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                Sajid Mohtadi
+                Mazedul Islam
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">
                 Web Developer
