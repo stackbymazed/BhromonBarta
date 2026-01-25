@@ -6,18 +6,14 @@ import { toast } from "react-toastify";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-/* =======================
-   Map Icon Configuration
-======================= */
+
 const markerIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 });
 
-/* =======================
-   Animation Variants
-======================= */
+
 const backgroundVariants = {
   animate: {
     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -29,9 +25,6 @@ const backgroundVariants = {
   },
 };
 
-/* =======================
-   Static Data
-======================= */
 const position = [22.8167, 91.1];
 
 const projects = [
@@ -51,9 +44,6 @@ const projects = [
   },
 ];
 
-/* =======================
-   Component
-======================= */
 const AboutUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +59,6 @@ const AboutUs = () => {
     >
       <div className="max-w-6xl mx-auto px-4 space-y-16">
 
-        {/* ================= Developer Section ================= */}
         <section>
           <h2 className="text-3xl font-bold text-center mb-10">
             Meet the Developer
@@ -93,7 +82,6 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ================= Projects Section ================= */}
         <section>
           <h3 className="text-2xl font-bold mb-6 text-center">Projects</h3>
 
@@ -132,14 +120,12 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* ================= Contact Info ================= */}
         <section className="flex flex-col sm:flex-row gap-6">
           <ContactCard icon={<MdLocationOn />} title="Location" value="Noakhali, Bangladesh" />
           <ContactCard icon={<MdPhone />} title="Phone" value="+8801893679303" />
           <ContactCard icon={<MdEmail />} title="Email" value="majedulislam223311@gmail.com" />
         </section>
 
-        {/* ================= Form & Map ================= */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Form */}
           <form
@@ -191,7 +177,7 @@ const AboutUs = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <Marker position={position} icon={markerIcon}>
-                <Popup>Noakhali, Bangladesh</Popup>
+                <Popup>Dhaka, Bangladesh</Popup>
               </Marker>
             </MapContainer>
           </div>
