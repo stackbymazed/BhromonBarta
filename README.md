@@ -59,12 +59,29 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app](https://bhromonbarta-6cc68.
 ---
 ## 📸 Major Pages & Features
 
-- 🏠 **Homepage** – Banner, Packages, Guides, Tourist Stories, Overview  
-- 📦 **Package Details** – Gallery, Plan, Guide Info, Booking Form  
-- 👤 **Tour Guide Profile** – Guide bio & related stories  
-- 📝 **Community Stories Page** – All shared stories  
-- 📍 **Trips Page** – All travel packages listed  
-- 💼 **Dashboard** – Separate views for Tourist, Guide, and Admin  
+🔐 JWT-based Authentication (Email/Password & Google Login)
+
+👥 Three User Roles: Tourist, Tour Guide, Admin
+
+📱 Fully Responsive UI (Desktop, Tablet & Mobile)
+
+🔄 Private Route Persistence after page reload
+
+📦 Tour Package Booking with guide assignment
+
+💳 Stripe Payment Integration
+
+🎉 Confetti Celebration after 3+ successful bookings (react-confetti)
+
+📸 Tourist Stories – Add, edit, delete & share on Facebook
+
+💼 Tour Guide Application System
+
+🔔 SweetAlert2 & React-Toastify notifications (no browser alerts)
+
+🚀 Framer Motion animations
+
+🔍 Advanced Search & Filter using MongoDB operators 
 
 ---
 
