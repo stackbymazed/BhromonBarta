@@ -59,41 +59,41 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app](https://bhromonbarta-6cc68.
 ---
 ## 📸 Major Pages & Features
 
-🔐 JWT-based Authentication (Email/Password & Google Login)
+ JWT-based Authentication (Email/Password & Google Login)
 
-👥 Three User Roles: Tourist, Tour Guide, Admin
+ Three User Roles: Tourist, Tour Guide, Admin
 
-📱 Fully Responsive UI (Desktop, Tablet & Mobile)
+ Fully Responsive UI (Desktop, Tablet & Mobile)
 
-🔄 Private Route Persistence after page reload
+ Private Route Persistence after page reload
 
-📦 Tour Package Booking with guide assignment
+ Tour Package Booking with guide assignment
 
-💳 Stripe Payment Integration
+ Stripe Payment Integration
 
-🎉 Confetti Celebration after 3+ successful bookings (react-confetti)
+ Confetti Celebration after 3+ successful bookings (react-confetti)
 
-📸 Tourist Stories – Add, edit, delete & share on Facebook
+ Tourist Stories – Add, edit, delete & share on Facebook
 
-💼 Tour Guide Application System
+ Tour Guide Application System
 
-🔔 SweetAlert2 & React-Toastify notifications (no browser alerts)
+ SweetAlert2 & React-Toastify notifications (no browser alerts)
 
-🚀 Framer Motion animations
+ Framer Motion animations
 
-🔍 Advanced Search & Filter using MongoDB operators 
+ Advanced Search & Filter using MongoDB operators 
 
 ---
 
 ## 🧾 Dashboard Overview (Protected)
 
-### 🎒 Tourist Dashboard
+###  Tourist Dashboard
 - Manage Profile  
 - My Bookings (with Stripe Payment)  
 - Add / Manage Stories  
 - Apply as Tour Guide  
 
-### 🧭 Tour Guide Dashboard
+###  Tour Guide Dashboard
 - Manage Profile  
 - View Assigned Tours (Accept/Reject bookings)  
 - Add / Manage Stories  
@@ -106,17 +106,17 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app](https://bhromonbarta-6cc68.
 
 ---
 
-## 🔐 Routing & Security
+##  Routing & Security
 
-- ✅ JWT saved to `localStorage`  
-- 🔁 Auth persists across reload  
-- 🔐 Protected routes via route guards  
-- 📦 Bookings only accessible by logged-in users  
-- ⚙️ Conditional rendering for dashboards & profile actions  
+-  JWT saved to `localStorage`  
+-  Auth persists across reload  
+-  Protected routes via route guards  
+-  Bookings only accessible by logged-in users  
+-  Conditional rendering for dashboards & profile actions  
 
 ---
 
-## ✅ Commit Standards
+##  Commit Standards
 
 - 20+ meaningful GitHub commits for client-side  
 - Descriptive commit messages like:  
@@ -127,10 +127,10 @@ Live Site: 👉 [https://bhromonbarta-6cc68.web.app](https://bhromonbarta-6cc68.
 
 ---
 
-## 👨‍💻 Developer Info
+##  Developer Info
 
-- **👤 Name:** Mazjedul Islam  
-- **📧 Email:** majedulislam223311@gmail.com  
-- **🌐 Portfolio:** [yourportfolio.com](https://mazed-portfolio.netlify.app)  
+- ** Name:** Mazjedul Islam  
+- ** Email:** majedulislam223311@gmail.com  
+- ** Portfolio:** [yourportfolio.com](https://mazed-portfolio.netlify.app)  
 
 
